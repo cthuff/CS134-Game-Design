@@ -12,15 +12,37 @@ public:
     bool    bSelected;
 };
 
+class Bullet : public BaseObject {
+    
+public:
+    Bullet();
+    void draw();
+    float speed;    // in screenspace coordinates per second  (pixels)
+    ofImage image;
+};
+
+
 class Sprite : public BaseObject {
     
 public:
     Sprite();
+    int getAvgX();
+    int getAvgY();
+    void draw();
+    void fire(float, float, vector<Bullet*>*);
+    float speed;    // in screenspace coordinates per second  (pixels)
+    ofImage image;
+};
+
+class Enemy : public BaseObject {
+    
+public:
+    Enemy();
     void draw();
     float speed;    // in screenspace coordinates per second  (pixels)
     ofImage image;
-    
 };
+
 
 
 class ofApp : public ofBaseApp{
@@ -44,7 +66,7 @@ public:
     void updateSprite();
     void moveSprite(MoveDir);
     
-    void updateBullet();
+    void updateBullet(Bullet b);
     void moveBullet(MoveDir);
     
     void stopSprite();
@@ -57,17 +79,21 @@ public:
     ofSoundPlayer mySound;
     
     Sprite sprite;
-    Sprite enemy;
-    Sprite bullet;
+    Bullet bullet;
+    Enemy enemy;
+    
     ofVec3f start_point;
     ofVec3f finish_point;
     float start_time;
     float finish_time;
     ofVec3f mouse_last;
     MoveDir moveDir;
+    MoveDir bulletDir = MoveUp;
+    
     bool accel;
     ofVec3f startAccelPoint;
     ofImage background;
     
+    vector<Bullet*>* bullets;
 };
 

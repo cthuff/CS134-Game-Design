@@ -22,13 +22,32 @@
 Sprite::Sprite() {
     trans.x = 0;
     trans.y = 0;
+    scale.x = .75;
+    scale.y = .75;
+    rot = 0;
+    speed = 0;
+    bSelected = false;
+}
+
+Enemy::Enemy() {
+    trans.x = 0;
+    trans.y = 0;
+    scale.x = 1;
+    scale.y = 1;
+    rot = 0;
+    speed = 0;
+    bSelected = false;
+}
+
+Bullet::Bullet() {
+    trans.x = 0;
+    trans.y = 0;
     scale.x = 1.0;
     scale.y = 1.0;
     rot = 0;
     speed = 0;
     bSelected = false;
 }
-
 
 void Sprite::draw() {
     
@@ -37,6 +56,42 @@ void Sprite::draw() {
     // draw image centered and add in translation amount
     //
     image.draw(-image.getWidth() / 2.0 + trans.x, -image.getHeight() / 2.0 + trans.y);
+}
+
+int Sprite::getAvgX() {
+    cout << trans.x << endl;
+    return trans.x;
+}
+
+int Sprite::getAvgY() {
+    cout << trans.y << endl;
+    return trans.y;
+}
+
+void Enemy::draw() {
+    
+    ofSetColor(255, 255, 255, 255);
+    
+    // draw image centered and add in translation amount
+    //
+    image.draw(-image.getWidth() / 2.0 + trans.x, -image.getHeight() / 2.0 + trans.y);
+}
+void Bullet::draw() {
+    
+    ofSetColor(255, 255, 255, 255);
+    
+    // draw image centered and add in translation amount
+    //
+    image.draw(trans);
+    
+}
+
+void Sprite::fire(float x, float y, vector<Bullet*>* bullets) {
+    Bullet* newBullet = new Bullet;
+    newBullet->image.load("images/bullet.png");
+    newBullet->trans.x = x;
+    newBullet->trans.y = y;
+    bullets->push_back(newBullet);
 }
 
 //--------------------------------------------------------------
@@ -48,13 +103,15 @@ void ofApp::setup(){
     bullet.image.load("images/bullet.png");
     explosion.load("sounds/explosion.mp3");
     fire.load("sounds/pew.mp3");
-    start_point = ofVec3f(50, 500);
+    start_point = ofVec3f(50, 600);
     finish_point = ofVec3f(650, 500);
     sprite.trans.set(start_point);
     sprite.speed = 120;   // in pixels per second (screenspace 1 unit = 1 pixel)
     moveDir = MoveStop;
     enemy.trans.set(200, 200);
     bullet.trans.set(500,500);
+    
+    bullets = new vector<Bullet*>();
 
 }
 
@@ -72,12 +129,25 @@ float ofApp::modulateAccel(float dist) {
     return sin(dist * PI) * 5.0 + 1.0;
 }
 
+void ofApp::updateBullet(Bullet b) {
+    float dist = b.speed * 5 / ofGetFrameRate();
+    ofVec3f dir;
+    ofRectangle r = ofGetWindowRect();
+    
+    dir = ofVec3f(0, -dist, 0);
+    b.trans += dir;
+}
+
+void ofApp::moveBullet(MoveDir dir) {
+    moveDir = dir;
+}
+
 void ofApp::updateSprite() {
     
     //
     // calculate distance to travel for this update
     //
-    float dist = sprite.speed * 2 / ofGetFrameRate();
+    float dist = sprite.speed * 3 / ofGetFrameRate();
     ofVec3f dir;
     ofRectangle r = ofGetWindowRect();
     
@@ -138,6 +208,7 @@ void ofApp::updateSprite() {
         }
     }
     sprite.trans += dir;
+    start_point += dir;
 }
 
 void ofApp::moveSprite(MoveDir dir) {
@@ -163,7 +234,12 @@ void ofApp::draw(){
     background.draw(0, 0, ofGetWindowWidth(), ofGetWindowHeight());
     enemy.draw();
     sprite.draw();
-    bullet.draw();
+    
+    for(int i = 0; i < bullets->size(); i++) {
+        Bullet* b = bullets->at(i);
+        b->trans.y -= 5;
+        b->draw();
+    }
 }
 
 
@@ -177,9 +253,12 @@ void ofApp::mouseMoved(int x, int y ){
 
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button){
-    ofPoint mouse_cur = ofPoint(x, y);
+    ofPoint mouse_cur = ofPoint(x, 0);
     ofVec3f delta = mouse_cur - mouse_last;
     sprite.trans += delta;
+    sprite.trans.y = 500;
+    start_point += delta;
+    start_point.y= 500;
     mouse_last = mouse_cur;
 }
 
@@ -223,8 +302,7 @@ void ofApp::keyPressed(int key) {
             break;
         case ' ':
             fire.play();
-            bullet.draw();
-            bullet.trans.set(400,500);
+            sprite.fire(sprite.trans.x, sprite.trans.y, bullets);
             break;
         case '.':
             sprite.speed += 30;
