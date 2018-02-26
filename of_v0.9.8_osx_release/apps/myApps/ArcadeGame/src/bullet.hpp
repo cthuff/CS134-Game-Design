@@ -1,8 +1,8 @@
 //
-//  enemy.hpp
+//  bullet.hpp
 //  ArcadeGame
 //
-//  Created by Craig on 2/21/18.
+//  Created by Craig on 2/26/18.
 //
 
 #pragma once
@@ -11,10 +11,10 @@
 #include "ofMain.h"
 #include "baseObject.h"
 
-class Enemy : public BaseObject {
+class Bullet : public BaseObject {
     
 public:
-    Enemy();
+    Bullet();
     void draw();
     float speed;    // in screenspace coordinates per second  (pixels)
     ofImage image;

@@ -9,21 +9,27 @@
 
 #include <stdio.h>
 #include "ofMain.h"
+#include "bullet.hpp"
+#include "baseObject.h"
 
-//class BaseObject {
-//public:
-//    ofVec2f trans, scale;
-//    float   rot;
-//    bool    bSelected;
-//};
 
-//class Player : public BaseObject {
-//
-//public:
-//    Player();
-//    void draw();
-//    float speed;    // in screenspace coordinates per second  (pixels)
-//    ofImage image;
-//
-//};
+class Player : public BaseObject {
+
+public:
+    Player();
+    int getAvgX();
+    int getAvgY();
+    void draw();
+    void fire(float, float, vector<Bullet*>*);
+    void updateSprite();
+    void moveSprite(MoveDir);
+    void stopSprite();
+
+    float speed;    // in screenspace coordinates per second  (pixels)
+    ofImage image;
+    MoveDir moveDir;
+    
+    ofVec3f start_point;
+    ofVec3f finish_point;
+};
 

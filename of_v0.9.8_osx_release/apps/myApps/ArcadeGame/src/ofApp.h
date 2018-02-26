@@ -2,48 +2,9 @@
 
 #include "ofMain.h"
 #include "player.hpp"
-
-typedef enum { MoveStop, MoveLeft, MoveRight, MoveUp, MoveDown } MoveDir;
-
-class BaseObject {
-public:
-    ofVec2f trans, scale;
-    float   rot;
-    bool    bSelected;
-};
-
-class Bullet : public BaseObject {
-    
-public:
-    Bullet();
-    void draw();
-    float speed;    // in screenspace coordinates per second  (pixels)
-    ofImage image;
-};
-
-
-class Sprite : public BaseObject {
-    
-public:
-    Sprite();
-    int getAvgX();
-    int getAvgY();
-    void draw();
-    void fire(float, float, vector<Bullet*>*);
-    float speed;    // in screenspace coordinates per second  (pixels)
-    ofImage image;
-};
-
-class Enemy : public BaseObject {
-    
-public:
-    Enemy();
-    void draw();
-    float speed;    // in screenspace coordinates per second  (pixels)
-    ofImage image;
-};
-
-
+#include "enemy.hpp"
+#include "bullet.hpp"
+#include "baseObject.h"
 
 class ofApp : public ofBaseApp{
     
@@ -63,35 +24,28 @@ public:
     void windowResized(int w, int h);
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
-    void updateSprite();
-    void moveSprite(MoveDir);
+    
     
     void updateBullet(Bullet b);
     void moveBullet(MoveDir);
     
-    void stopSprite();
-    void startAccel();
-    void stopAccel();
-    float modulateAccel(float);
     
     ofSoundPlayer explosion;
     ofSoundPlayer fire;
     ofSoundPlayer mySound;
     
-    Sprite sprite;
+    Player sprite;
     Bullet bullet;
     Enemy enemy;
     
-    ofVec3f start_point;
-    ofVec3f finish_point;
+    
     float start_time;
     float finish_time;
     ofVec3f mouse_last;
-    MoveDir moveDir;
+    
     MoveDir bulletDir = MoveUp;
     
-    bool accel;
-    ofVec3f startAccelPoint;
+   
     ofImage background;
     
     vector<Bullet*>* bullets;

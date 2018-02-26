@@ -16,84 +16,6 @@
 // such as this one.
 //
 
-//
-// Basic Sprite Object
-//
-Sprite::Sprite() {
-    trans.x = 0;
-    trans.y = 0;
-    scale.x = .75;
-    scale.y = .75;
-    rot = 0;
-    speed = 0;
-    bSelected = false;
-}
-
-Enemy::Enemy() {
-    trans.x = 0;
-    trans.y = 0;
-    scale.x = 1;
-    scale.y = 1;
-    rot = 0;
-    speed = 0;
-    bSelected = false;
-}
-
-Bullet::Bullet() {
-    trans.x = 0;
-    trans.y = 0;
-    scale.x = 1.0;
-    scale.y = 1.0;
-    rot = 0;
-    speed = 0;
-    bSelected = false;
-}
-
-void Sprite::draw() {
-    
-    ofSetColor(255, 255, 255, 255);
-    
-    // draw image centered and add in translation amount
-    //
-    image.draw(-image.getWidth() / 2.0 + trans.x, -image.getHeight() / 2.0 + trans.y);
-}
-
-int Sprite::getAvgX() {
-    cout << trans.x << endl;
-    return trans.x;
-}
-
-int Sprite::getAvgY() {
-    cout << trans.y << endl;
-    return trans.y;
-}
-
-void Enemy::draw() {
-    
-    ofSetColor(255, 255, 255, 255);
-    
-    // draw image centered and add in translation amount
-    //
-    image.draw(-image.getWidth() / 2.0 + trans.x, -image.getHeight() / 2.0 + trans.y);
-}
-void Bullet::draw() {
-    
-    ofSetColor(255, 255, 255, 255);
-    
-    // draw image centered and add in translation amount
-    //
-    image.draw(trans);
-    
-}
-
-void Sprite::fire(float x, float y, vector<Bullet*>* bullets) {
-    Bullet* newBullet = new Bullet;
-    newBullet->image.load("images/bullet.png");
-    newBullet->trans.x = x;
-    newBullet->trans.y = y;
-    bullets->push_back(newBullet);
-}
-
 //--------------------------------------------------------------
 void ofApp::setup(){
     ofSetVerticalSync(true);
@@ -103,31 +25,25 @@ void ofApp::setup(){
     bullet.image.load("images/bullet.png");
     explosion.load("sounds/explosion.mp3");
     fire.load("sounds/pew.mp3");
-    start_point = ofVec3f(50, 600);
-    finish_point = ofVec3f(650, 500);
-    sprite.trans.set(start_point);
+    sprite.start_point = ofVec3f(50, 600);
+    sprite.finish_point = ofVec3f(650, 600);
+    sprite.trans.set(sprite.start_point);
     sprite.speed = 120;   // in pixels per second (screenspace 1 unit = 1 pixel)
-    moveDir = MoveStop;
     enemy.trans.set(200, 200);
     bullet.trans.set(500,500);
-    
     bullets = new vector<Bullet*>();
 
 }
 
 //--------------------------------------------------------------
 void ofApp::update() {
-    
-    updateSprite();
-    //updateSprite(bullet);
+    sprite.updateSprite();
 }
 
 // given a distance return a modulated value between 1-10 based on
 // sin wave shape from 0 to PI
 //
-float ofApp::modulateAccel(float dist) {
-    return sin(dist * PI) * 5.0 + 1.0;
-}
+
 
 void ofApp::updateBullet(Bullet b) {
     float dist = b.speed * 5 / ofGetFrameRate();
@@ -138,95 +54,9 @@ void ofApp::updateBullet(Bullet b) {
     b.trans += dir;
 }
 
-void ofApp::moveBullet(MoveDir dir) {
-    moveDir = dir;
-}
-
-void ofApp::updateSprite() {
-    
-    //
-    // calculate distance to travel for this update
-    //
-    float dist = sprite.speed * 3 / ofGetFrameRate();
-    ofVec3f dir;
-    ofRectangle r = ofGetWindowRect();
-    
-    //
-    //  if the accelerator modifer key is pressed, accelerate and
-    //  deacclerate sprite from starting position to window edge
-    //
-    if (accel) {
-        
-        switch (moveDir)
-        {
-            case MoveUp:
-            {
-                float totalDist = startAccelPoint.y;
-                float frac = sprite.trans.y / totalDist;
-                dir = ofVec3f(0, -dist * modulateAccel(frac), 0);
-            }
-                break;
-            case MoveDown:
-            {
-                float totalDist = r.getMaxY() - startAccelPoint.y;
-                float frac = sprite.trans.y / totalDist;
-                dir = ofVec3f(0, dist * modulateAccel(frac), 0);
-            }
-                break;
-            case MoveLeft:
-            {
-                float totalDist = startAccelPoint.x;
-                float frac = sprite.trans.x / totalDist;
-                dir = ofVec3f(-dist * modulateAccel(frac), 0, 0);
-            }
-                break;
-            case MoveRight:
-            {
-                float totalDist = r.getMaxX() - startAccelPoint.x;
-                float frac = sprite.trans.x / totalDist;
-                dir = ofVec3f(dist * modulateAccel(frac), 0, 0);
-                break;
-            }
-        }
-        
-    }
-    else
-    {
-        switch (moveDir)
-        {
-            case MoveUp:
-                dir = ofVec3f(0, -dist, 0);
-                break;
-            case MoveDown:
-                dir = ofVec3f(0, dist, 0);
-            case MoveLeft:
-                dir = ofVec3f(-dist, 0, 0);
-                break;
-            case MoveRight:
-                dir = ofVec3f(dist, 0, 0);
-                break;
-        }
-    }
-    sprite.trans += dir;
-    start_point += dir;
-}
-
-void ofApp::moveSprite(MoveDir dir) {
-    moveDir = dir;
-}
-
-void ofApp::stopSprite() {
-    moveDir = MoveStop;
-}
-
-void ofApp::startAccel() {
-    startAccelPoint = sprite.trans;
-    accel = true;
-}
-
-void ofApp::stopAccel() {
-    accel = false;
-}
+//void ofApp::moveBullet(MoveDir dir) {
+//    sprite.moveDir = dir;
+//}
 
 
 //--------------------------------------------------------------
@@ -255,10 +85,10 @@ void ofApp::mouseMoved(int x, int y ){
 void ofApp::mouseDragged(int x, int y, int button){
     ofPoint mouse_cur = ofPoint(x, 0);
     ofVec3f delta = mouse_cur - mouse_last;
-    sprite.trans += delta;
-    sprite.trans.y = 500;
-    start_point += delta;
-    start_point.y= 500;
+    sprite.trans += delta/1.5;
+    sprite.trans.y = 600;
+    sprite.start_point += delta/1.5;
+    sprite.start_point.y= 600;
     mouse_last = mouse_cur;
 }
 
@@ -314,12 +144,12 @@ void ofApp::keyPressed(int key) {
             explosion.play();
             break;
         case OF_KEY_RIGHT:
-            stopSprite();
-            moveSprite(MoveRight);
+            sprite.stopSprite();
+           sprite.moveSprite(MoveRight);
             break;
         case OF_KEY_LEFT:
-            stopSprite();
-            moveSprite(MoveLeft);
+           sprite.stopSprite();
+            sprite.moveSprite(MoveLeft);
             break;
         case OF_KEY_UP:
             
@@ -330,7 +160,7 @@ void ofApp::keyPressed(int key) {
         case OF_KEY_ALT:
             break;
         case OF_KEY_CONTROL:
-            startAccel();
+            
             break;
         case OF_KEY_SHIFT:
             break;
@@ -349,13 +179,12 @@ void ofApp::keyReleased(int key) {
         case OF_KEY_RIGHT:
         case OF_KEY_UP:
         case OF_KEY_DOWN:
-            stopSprite();
-            stopAccel();
+            sprite.stopSprite();
             break;
         case OF_KEY_ALT:
             break;
         case OF_KEY_CONTROL:
-            stopAccel();
+            
             break;
         case OF_KEY_SHIFT:
             break;
