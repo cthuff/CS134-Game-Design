@@ -24,8 +24,7 @@ void ofApp::setup(){
     enemy.image.load("images/enemy.png");
     bullet.image.load("images/bullet.png");
     explosion.load("sounds/explosion.mp3");
-    fire.load("sounds/pew.mp3");
-    sprite.start_point = ofVec3f(50, 600);
+    sprite.start_point = ofVec3f(70, ofGetWindowHeight() - 90);
     sprite.finish_point = ofVec3f(650, 600);
     sprite.trans.set(sprite.start_point);
     sprite.speed = 120;   // in pixels per second (screenspace 1 unit = 1 pixel)
@@ -86,9 +85,9 @@ void ofApp::mouseDragged(int x, int y, int button){
     ofPoint mouse_cur = ofPoint(x, 0);
     ofVec3f delta = mouse_cur - mouse_last;
     sprite.trans += delta/1.5;
-    sprite.trans.y = 600;
+    sprite.trans.y = ofGetWindowHeight() - 90;
     sprite.start_point += delta/1.5;
-    sprite.start_point.y= 600;
+    sprite.start_point.y= ofGetWindowHeight() - 90 ;
     mouse_last = mouse_cur;
 }
 
@@ -131,7 +130,6 @@ void ofApp::keyPressed(int key) {
         case 'u':
             break;
         case ' ':
-            fire.play();
             sprite.fire(sprite.trans.x, sprite.trans.y, bullets);
             break;
         case '.':
@@ -144,11 +142,11 @@ void ofApp::keyPressed(int key) {
             explosion.play();
             break;
         case OF_KEY_RIGHT:
-            sprite.stopSprite();
-           sprite.moveSprite(MoveRight);
+			sprite.stopSprite();
+			sprite.moveSprite(MoveRight);
             break;
         case OF_KEY_LEFT:
-           sprite.stopSprite();
+			sprite.stopSprite();
             sprite.moveSprite(MoveLeft);
             break;
         case OF_KEY_UP:

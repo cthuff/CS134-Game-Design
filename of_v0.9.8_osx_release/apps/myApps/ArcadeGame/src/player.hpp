@@ -17,8 +17,6 @@ class Player : public BaseObject {
 
 public:
     Player();
-    int getAvgX();
-    int getAvgY();
     void draw();
     void fire(float, float, vector<Bullet*>*);
     void updateSprite();

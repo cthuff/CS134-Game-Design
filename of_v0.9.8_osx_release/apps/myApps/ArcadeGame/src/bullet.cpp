@@ -15,6 +15,7 @@ Bullet::Bullet() {
     rot = 0;
     speed = 0;
     bSelected = false;
+	fire.load("sounds/pew.mp3");
 }
 
 void Bullet::draw() {
@@ -23,6 +24,18 @@ void Bullet::draw() {
     
     // draw image centered and add in translation amount
     //
-    image.draw(trans.x - 10, trans.y - 100);
-    
+    image.draw(trans.x - 10, trans.y - 100); 
+	kill();
+}
+
+void Bullet::sound()
+{
+	fire.play();
+}
+
+void Bullet::kill()
+{
+	if(trans.y > ofGetWindowHeight())
+	image.clear();
+	
 }

@@ -31,7 +31,6 @@ public:
     
     
     ofSoundPlayer explosion;
-    ofSoundPlayer fire;
     ofSoundPlayer mySound;
     
     Player sprite;

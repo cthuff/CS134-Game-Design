@@ -31,37 +31,23 @@ void Player::draw() {
         
 }
 
-int Player::getAvgX() {
-    cout << trans.x << endl;
-    return trans.x;
-}
-
-int Player::getAvgY() {
-    cout << trans.y << endl;
-    return trans.y;
-}
-
 void Player::fire(float x, float y, vector<Bullet*>* bullets) {
     Bullet* newBullet = new Bullet;
     newBullet->image.load("images/bullet.png");
     newBullet->trans.x = x;
     newBullet->trans.y = y;
+	newBullet->sound();
     bullets->push_back(newBullet);
+
 }
 
 void Player::updateSprite() {
     
-    //
-    // calculate distance to travel for this update
-    //
-    float dist = speed * 3.5 / ofGetFrameRate();
+ 
+    float dist = speed * 3 / ofGetFrameRate();
     ofVec3f dir;
-    ofRectangle r = ofGetWindowRect();
-    
-    //
-    //  if the accelerator modifer key is pressed, accelerate and
-    //  deacclerate sprite from starting position to window edge
-    //
+   // ofRectangle r = ofGetWindowRect();
+   
     {
         switch (moveDir)
         {
