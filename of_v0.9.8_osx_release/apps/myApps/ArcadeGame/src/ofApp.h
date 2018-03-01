@@ -5,6 +5,8 @@
 #include "enemy.hpp"
 #include "bullet.hpp"
 #include "baseObject.h"
+#include "emitter.h"
+#include "ofxGui.h"
 
 class ofApp : public ofBaseApp{
     
@@ -28,8 +30,9 @@ public:
     
     void updateBullet(Bullet b);
     void moveBullet(MoveDir);
-    
-    
+     vector<Bullet*>* bullets;
+     MoveDir bulletDir = MoveUp;
+    ofImage background;
     ofSoundPlayer explosion;
     ofSoundPlayer mySound;
     
@@ -37,16 +40,19 @@ public:
     Bullet bullet;
     Enemy enemy;
     
-    
     float start_time;
     float finish_time;
     ofVec3f mouse_last;
     
-    MoveDir bulletDir = MoveUp;
-    
    
-    ofImage background;
-    
-    vector<Bullet*>* bullets;
+	Emitter *emitter;
+	Enemy collider;
+ 
+	ofxFloatSlider rate;
+	ofxFloatSlider life;
+	ofxVec3Slider velocity;
+	ofxLabel screenSize;
+
+	ofxPanel gui;
 };
 

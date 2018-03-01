@@ -15,7 +15,25 @@ class Enemy : public BaseObject {
     
 public:
     Enemy();
+	float age();
     void draw();
     float speed;    // in screenspace coordinates per second  (pixels)
     ofImage image;
+	ofVec3f velocity; // in pixels/sec
+	float birthtime; // elapsed time in ms
+	float lifespan;  //  time in ms
+	string name;
+	bool haveImage;
+	float width, height;
+};
+
+class EnemySystem {
+public:
+	void add(Enemy);
+	void remove(int);
+	void update();
+	void removeNear(ofVec3f point, float dist);
+	void draw();
+	vector<Enemy> enemies;
+
 };

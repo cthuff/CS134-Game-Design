@@ -18,6 +18,14 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+
+	emitter = new Emitter(new EnemySystem());
+	emitter->setChildSize(10, 10);
+	collider.trans.set(800, 800);
+	collider.width = 20;
+	collider.height = 20;
+
+
     ofSetVerticalSync(true);
     background.load("images/background.png");
     sprite.image.load("images/USS_Danger.png");
@@ -32,6 +40,13 @@ void ofApp::setup(){
     bullet.trans.set(500,500);
     bullets = new vector<Bullet*>();
 
+	gui.setup();
+	gui.add(rate.setup("rate", 1, 1, 10));
+	gui.add(life.setup("life", 2, .1, 10));
+	gui.add(velocity.setup("velocity", ofVec3f(100, 100, 0), ofVec3f(-1000, -1000, -1000), ofVec3f(1000, 1000, 1000)));
+
+	emitter->trans = (ofVec3f(ofGetWindowWidth() / 2, ofGetWindowHeight() / 2, 0));
+	emitter->start();
 }
 
 //--------------------------------------------------------------
@@ -63,12 +78,19 @@ void ofApp::draw(){
     background.draw(0, 0, ofGetWindowWidth(), ofGetWindowHeight());
     enemy.draw();
     sprite.draw();
+	emitter->draw();
     
-    for(int i = 0; i < bullets->size(); i++) {
-        Bullet* b = bullets->at(i);
-        b->trans.y -= 5;
-        b->draw();
+	for (int i = 0; i < bullets->size(); i++) {
+		Bullet* b = bullets->at(i);
+		b->trans.y -= 5;
+		if (b->trans.y < 0) {
+			b->image.clear();
+			bullets->erase(bullets->begin() + i);
+		}
+		else 
+			b->draw();
     }
+	//cout << bullets->size() << endl;
 }
 
 
@@ -84,9 +106,9 @@ void ofApp::mouseMoved(int x, int y ){
 void ofApp::mouseDragged(int x, int y, int button){
     ofPoint mouse_cur = ofPoint(x, 0);
     ofVec3f delta = mouse_cur - mouse_last;
-    sprite.trans += delta/1.5;
+    sprite.trans += delta/2;
     sprite.trans.y = ofGetWindowHeight() - 90;
-    sprite.start_point += delta/1.5;
+    sprite.start_point += delta/2;
     sprite.start_point.y= ofGetWindowHeight() - 90 ;
     mouse_last = mouse_cur;
 }
