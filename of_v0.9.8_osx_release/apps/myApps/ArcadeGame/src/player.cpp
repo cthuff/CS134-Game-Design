@@ -38,7 +38,8 @@ void Player::fire(float x, float y, vector<Bullet*>* bullets) {
     newBullet->trans.y = y;
 	newBullet->sound();
     bullets->push_back(newBullet);
-
+   // if(newBullet->trans.y < 0)
+        
 }
 
 void Player::updateSprite() {

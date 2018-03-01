@@ -25,7 +25,7 @@ void Bullet::draw() {
     // draw image centered and add in translation amount
     //
     image.draw(trans.x - 10, trans.y - 100); 
-	kill();
+	//kill();
 }
 
 void Bullet::sound()
@@ -35,7 +35,7 @@ void Bullet::sound()
 
 void Bullet::kill()
 {
-	if(trans.y > ofGetWindowHeight())
-	image.clear();
+	//if(trans.y > ofGetWindowHeight())
+	//image.clear();
 	
 }
