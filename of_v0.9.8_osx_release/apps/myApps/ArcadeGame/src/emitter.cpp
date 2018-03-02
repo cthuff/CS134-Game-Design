@@ -2,7 +2,7 @@
 
 
 #include "ofMain.h"
-#include "Emitter.h"
+#include "emitter.h"
 
 
 
@@ -16,7 +16,7 @@ Emitter::Emitter(EnemySystem *enemySys) {
 	lastSpawned = 0;
 	rate = 1;    // sprites/sec
 	//haveChildImage = false;
-	haveImage = false;
+	haveImage = true;
 	velocity = ofVec3f(100, 100, 0);
 	drawable = true;
 	width = 50;
@@ -24,7 +24,7 @@ Emitter::Emitter(EnemySystem *enemySys) {
 	childWidth = 10;
 	childHeight = 10;
 	image.load("images/enemy.png");
-	childImage.load("images/enemy.png");
+	//childImage.load("images/bullet.png");
 }
 
 //  Draw the Emitter if it is drawable. In many cases you would want a hidden emitter

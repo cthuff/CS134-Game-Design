@@ -4,7 +4,6 @@
 // Basic Sprite Emitter Class
 //
 //
-//  Kevin M. Smith - CS 134 SJSU
 
 #include "baseObject.h"
 #include "enemy.hpp"

@@ -1,31 +1,7 @@
 #include "ofApp.h"
-//----------------------------------------------------------------------------------
-//
-// This example code demonstrates some of the basic animation techniques we dicussed
-// in class for animating sprite motion, using simple translation and speed control
-//
-// In this file the following controls are used to demonstrate this:
-//
-//    1) Use mouse pointer to drag the sprite around
-//    2) Arrow keys animate sprite in horizontal or vertical direction
-//    3) Increase/Decrease speed of animation using "." or "," key
-//    4) Use ctrl-Arrow Keys to apply warp or sin wave to motion to
-//       speed up / slow down
-//
-// In your application, I recommend you encapsulate your sprite in a spite object
-// such as this one.
-//
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-
-	emitter = new Emitter(new EnemySystem());
-	emitter->setChildSize(10, 10);
-	collider.trans.set(800, 800);
-	collider.width = 20;
-	collider.height = 20;
-
-
     ofSetVerticalSync(true);
     background.load("images/background.png");
     sprite.image.load("images/USS_Danger.png");
@@ -44,19 +20,27 @@ void ofApp::setup(){
 	gui.add(rate.setup("rate", 1, 1, 10));
 	gui.add(life.setup("life", 2, .1, 10));
 	gui.add(velocity.setup("velocity", ofVec3f(100, 100, 0), ofVec3f(-1000, -1000, -1000), ofVec3f(1000, 1000, 1000)));
-
-	emitter->trans = (ofVec3f(ofGetWindowWidth() / 2, ofGetWindowHeight() / 2, 0));
-	emitter->start();
+    
+//    emitter = new Emitter(new EnemySystem());
+//    emitter->setChildSize(10, 10);
+//    collider.trans.set(800, 800);
+//    collider.width = 20;
+//    collider.height = 20;
+//    emitter->trans = (ofVec3f(ofGetWindowWidth() / 2, ofGetWindowHeight() / 2, 0));
+//    emitter->start();
+//    emitter->setChildImage(bullet.image);
 }
 
 //--------------------------------------------------------------
 void ofApp::update() {
     sprite.updateSprite();
+//    emitter->setRate(rate);
+//    emitter->setLifespan(life * 1000);    // convert to milliseconds
+//    emitter->setVelocity(velocity);
+//    emitter->update();
+    
+    checkCollisions();
 }
-
-// given a distance return a modulated value between 1-10 based on
-// sin wave shape from 0 to PI
-//
 
 
 void ofApp::updateBullet(Bullet b) {
@@ -68,17 +52,13 @@ void ofApp::updateBullet(Bullet b) {
     b.trans += dir;
 }
 
-//void ofApp::moveBullet(MoveDir dir) {
-//    sprite.moveDir = dir;
-//}
-
 
 //--------------------------------------------------------------
 void ofApp::draw(){
     background.draw(0, 0, ofGetWindowWidth(), ofGetWindowHeight());
     enemy.draw();
     sprite.draw();
-	emitter->draw();
+	
     
 	for (int i = 0; i < bullets->size(); i++) {
 		Bullet* b = bullets->at(i);
@@ -90,15 +70,22 @@ void ofApp::draw(){
 		else 
 			b->draw();
     }
-	//cout << bullets->size() << endl;
+    emitter->draw();
+    collider.draw();
+    gui.draw();
+
 }
 
-
-//--------------------------------------------------------------
+void ofApp::checkCollisions() {
+    
+    float dist = emitter->maxDistPerFrame();
+    collider.width = dist;
+    collider.height = dist;
+    emitter->sys->removeNear(collider.trans, emitter->maxDistPerFrame());
+}
 
 //--------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y ){
-    //    cout << "mouse( " << x << "," << y << ")" << endl;
     
 }
 
@@ -152,7 +139,9 @@ void ofApp::keyPressed(int key) {
         case 'u':
             break;
         case ' ':
+            if(isUp)
             sprite.fire(sprite.trans.x, sprite.trans.y, bullets);
+            isUp = false;
             break;
         case '.':
             sprite.speed += 30;
@@ -164,23 +153,18 @@ void ofApp::keyPressed(int key) {
             explosion.play();
             break;
         case OF_KEY_RIGHT:
-			sprite.stopSprite();
 			sprite.moveSprite(MoveRight);
             break;
         case OF_KEY_LEFT:
-			sprite.stopSprite();
             sprite.moveSprite(MoveLeft);
             break;
         case OF_KEY_UP:
-            
             break;
         case OF_KEY_DOWN:
-            
             break;
         case OF_KEY_ALT:
             break;
         case OF_KEY_CONTROL:
-            
             break;
         case OF_KEY_SHIFT:
             break;
@@ -194,19 +178,11 @@ void ofApp::keyPressed(int key) {
 void ofApp::keyReleased(int key) {
     switch (key) {
         case ' ':
+            isUp = true;
             break;
         case OF_KEY_LEFT:
+            break;
         case OF_KEY_RIGHT:
-        case OF_KEY_UP:
-        case OF_KEY_DOWN:
-            sprite.stopSprite();
-            break;
-        case OF_KEY_ALT:
-            break;
-        case OF_KEY_CONTROL:
-            
-            break;
-        case OF_KEY_SHIFT:
             break;
     }
 }

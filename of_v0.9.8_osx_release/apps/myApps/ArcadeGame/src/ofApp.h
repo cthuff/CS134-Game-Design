@@ -26,15 +26,16 @@ public:
     void windowResized(int w, int h);
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
-    
+    void checkCollisions();
     
     void updateBullet(Bullet b);
     void moveBullet(MoveDir);
-     vector<Bullet*>* bullets;
-     MoveDir bulletDir = MoveUp;
+    vector<Bullet*>* bullets;
+    MoveDir bulletDir = MoveUp;
     ofImage background;
     ofSoundPlayer explosion;
     ofSoundPlayer mySound;
+    bool isUp;
     
     Player sprite;
     Bullet bullet;
@@ -44,7 +45,6 @@ public:
     float finish_time;
     ofVec3f mouse_last;
     
-   
 	Emitter *emitter;
 	Enemy collider;
  
