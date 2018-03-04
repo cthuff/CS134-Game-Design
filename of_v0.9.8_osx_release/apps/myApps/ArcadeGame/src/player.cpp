@@ -3,13 +3,13 @@
 //  ArcadeGame
 //
 //  Created by Craig on 2/21/18.
+//  This is the turret that the player controls.
+//  It will fire bullets at the enemies as the come on the screen.
 //
 
 #include "player.hpp"
 
-//This is the turret that the player controls.
-//It will fire bullets at the enemies as the come on the screen.
-// 
+
 Player::Player() {
     trans.x = 0;
     trans.y = 0;

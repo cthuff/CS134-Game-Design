@@ -3,7 +3,7 @@
 //  ArcadeGame
 //
 //  Created by Craig on 2/21/18.
-//
+//  Controls the turret class the player will be using
 
 #pragma once
 
@@ -11,8 +11,6 @@
 #include "ofMain.h"
 #include "bullet.hpp"
 #include "baseObject.h"
-
-//Controls the turret class the player will be using
 
 class Player : public BaseObject {
 

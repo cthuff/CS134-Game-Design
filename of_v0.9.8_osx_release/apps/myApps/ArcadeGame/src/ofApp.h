@@ -1,3 +1,10 @@
+//
+//  ofApp.h
+//  ArcadeGame
+//
+//  Created by Craig on 2/26/18.
+//
+
 #pragma once
 
 #include "ofMain.h"

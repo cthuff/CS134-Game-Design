@@ -27,6 +27,9 @@ public:
 	float width, height;
 };
 
+
+// The enemy system keeps track of all the enemies that currently exist in the game
+//
 class EnemySystem {
 public:
     EnemySystem();

@@ -4,14 +4,13 @@
 //
 //  Created by Craig on 2/26/18.
 //
+//  Creates a new object that the player will fire at the enemies
 
 #pragma once
 
 #include <stdio.h>
 #include "ofMain.h"
 #include "baseObject.h"
-
-//Creates a new object that the player will fire at the enemies
 
 class Bullet : public BaseObject {
     
@@ -20,7 +19,7 @@ public:
     void draw();
 	void sound();
 	void kill();
-    float speed;    // in screenspace coordinates per second  (pixels)
+    float speed;
     ofImage image;
 	ofSoundPlayer fire;
 };
