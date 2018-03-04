@@ -21,8 +21,6 @@ void Player::draw() {
     
     ofSetColor(255, 255, 255, 255);
     
-    // draw image centered and add in translation amount
-    //
     image.draw(-image.getWidth() / 2.0 + trans.x, -image.getHeight() / 2.0 + trans.y);
     if(trans.x <= 69)
         trans.x = 69;
@@ -38,6 +36,7 @@ void Player::fire(float x, float y, vector<Bullet*>* bullets) {
     newBullet->trans.y = y;
 	newBullet->sound();
     bullets->push_back(newBullet);
+    
    // if(newBullet->trans.y < 0)
         
 }
@@ -62,6 +61,9 @@ void Player::updateSprite() {
                 break;
             case MoveRight:
                 dir = ofVec3f(dist, 0, 0);
+                break;
+            case MoveStop:
+                dir = ofVec3f(0, 0, 0);
                 break;
         }
     }

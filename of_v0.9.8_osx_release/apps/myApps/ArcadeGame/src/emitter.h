@@ -20,9 +20,6 @@ public:
 	void stop();
 	void setLifespan(float);
 	void setVelocity(ofVec3f);
-	void setChildImage(ofImage);
-	void setChildSize(float w, float h) { childWidth = w; childHeight = h; }
-	void setImage(ofImage);
 	void setRate(float);
 	float maxDistPerFrame();
 	void update();

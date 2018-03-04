@@ -29,11 +29,15 @@ public:
 
 class EnemySystem {
 public:
+    EnemySystem();
 	void add(Enemy);
 	void remove(int);
 	void update();
-	void removeNear(ofVec3f point, float dist);
+	bool removeNear(ofVec3f point, float dist);
 	void draw();
 	vector<Enemy> enemies;
+    float enemies_killed;
+    bool levelFinish;
+    ofSoundPlayer explosion;
 
 };
