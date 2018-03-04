@@ -28,7 +28,7 @@ void Emitter::update() {
 	if ((time - lastSpawned) > (1000.0 / rate)) {
 		// spawn a new sprite
 		Enemy enemy;
-		enemy.velocity = ofVec3f(rand() % 300, rand() % 300);
+		enemy.velocity = ofVec3f(rand() % 500, rand() % 500);
 		enemy.lifespan = lifespan;
 		enemy.trans = ofVec2f((rand() % ofGetWindowHeight()), 0);
 		enemy.birthtime = time;

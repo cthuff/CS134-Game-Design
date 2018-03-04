@@ -35,6 +35,7 @@ public:
     ofImage background;
     ofSoundPlayer explosion;
     ofSoundPlayer mySound;
+    ofSoundPlayer music;
     bool isUp;
     
     Player sprite;
@@ -46,7 +47,6 @@ public:
     ofVec3f mouse_last;
     
 	Emitter *emitter;
-	Enemy collider;
  
 	ofxFloatSlider rate;
 	ofxFloatSlider life;

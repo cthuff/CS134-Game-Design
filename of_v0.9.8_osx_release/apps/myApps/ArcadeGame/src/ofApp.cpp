@@ -4,11 +4,15 @@
 void ofApp::setup(){
     ofSetWindowTitle("Rocket Surgery!");
     ofSetVerticalSync(true);
+//    ofSetFullscreen(true);
     
     background.load("images/background.png");
     sprite.image.load("images/USS_Danger.png");
     bullet.image.load("images/bullet.png");
     explosion.load("sounds/explosion.mp3");
+    music.load("sounds/DangerZone.mp3");
+    music.setLoop(true);
+    music.play();
     
     sprite.start_point = ofVec3f(70, ofGetWindowHeight() - 90);
     sprite.finish_point = ofVec3f(650, 600);
@@ -26,6 +30,7 @@ void ofApp::setup(){
     emitter = new Emitter(new EnemySystem());
     emitter->trans = (ofVec3f(ofGetWindowWidth() / 2, ofGetWindowHeight() / 2, 0));
     emitter->start();
+    
     
 }
 
@@ -57,8 +62,8 @@ void ofApp::draw(){
         
     }
     emitter->draw();
-//    collider.draw();
-//    gui.draw();
+    
+    gui.draw();
 
 }
 
@@ -140,8 +145,7 @@ void ofApp::keyPressed(int key) {
             sprite.speed -= 100;
             break;
         case 'p':
-            explosion.play();
-            break;
+             break;
         case OF_KEY_RIGHT:
 			sprite.moveSprite(MoveRight);
             break;
