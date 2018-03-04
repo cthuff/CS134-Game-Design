@@ -50,6 +50,7 @@ class ofApp : public ofBaseApp{
 		ofxFloatSlider gravity;
 		ofxFloatSlider damping;
 		ofxFloatSlider radius;
+        ofxFloatSlider life;
 		ofxVec3Slider velocity;
 		ofxPanel gui;
 };

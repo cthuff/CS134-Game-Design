@@ -1,6 +1,6 @@
 //  CS 134 - In-Class exercise - Getting started with Particle Physics
 //
-//  Kevin M. Smith - CS 134 - SJSU CS
+//  Craig Huff - CS 134 - SJSU CS
 
 #include "ofApp.h"
 
@@ -30,9 +30,7 @@ void Particle::draw() {
 //
 void Particle::integrate() { 
 	// (1) update position from velocity and time interval
-    cout << position << endl;
     position = position + velocity * 1/60.f;
-    cout << position << endl;
 	// (2) update acceleration from velocity and time interval
     velocity = velocity + acceleration * 1/60.f;
 	// (3) multiply final result by damping factor to sim drag
@@ -47,7 +45,7 @@ void ofApp::launchParticle() {
     float time = ofGetElapsedTimeMillis();
 	Particle* particle = new Particle();
     particle->birthtime = time;
-    particle->lifespan = 5;
+    particle->lifespan = life;
 	particle->velocity.set(velocity);
 	particle->acceleration.set(0, -gravity, 0);
 	particle->damping = damping;
@@ -79,6 +77,7 @@ void ofApp::setup(){
 	gui.add(damping.setup("Damping", .99, .1, 1.0));
     gui.add(gravity.setup("Gravity", 10, 1, 20));
 	gui.add(radius.setup("Radius", .5, .1, 1.0));
+    gui.add(life.setup("Lifespan", 5, .1, 10));
 	bHide = false;
 }
 
