@@ -1,0 +1,7 @@
+<group>
+	<Initial_Velocity>0, 20, 0</Initial_Velocity>
+	<Damping>0.99</Damping>
+	<Gravity>10</Gravity>
+	<Radius>0.5</Radius>
+<group/>
+</group>
