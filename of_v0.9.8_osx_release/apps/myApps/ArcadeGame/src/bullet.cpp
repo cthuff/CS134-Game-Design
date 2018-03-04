@@ -19,22 +19,16 @@ Bullet::Bullet() {
 }
 
 void Bullet::draw() {
-    
     ofSetColor(255, 255, 255, 255);
-    
-    // draw image centered and add in translation amount
-    //
-    image.draw(trans.x - 10, trans.y - 100); 
-	
+    image.draw(trans.x - 10, trans.y - 100);
 }
-
+//The bullet plays the sound when fired, not the turret
 void Bullet::sound()
 {
 	fire.play();
 }
-
+//Moves the bullet to where it will be destoryed on the next frame.
 void Bullet::kill()
 {
     trans.set(0, -10);
-	image.clear();
 }

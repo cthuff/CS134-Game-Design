@@ -24,42 +24,51 @@ Enemy::Enemy() {
 void Enemy::draw() {
     
     ofSetColor(255, 255, 255, 255);
-    
-    // draw image centered and add in translation amount
-    //
     image.draw(-image.getWidth() / 2.0 + trans.x, -image.getHeight() / 2.0 + trans.y);
 }
 
+//Initializes the two conditions to finish the game, and loads the sound for enemy collisions
+//
 EnemySystem::EnemySystem() {
     enemies_killed = 0;
     levelFinish == false;
     explosion.load("sounds/explosion.mp3");
 }
 
+//Track the age of the enemy.
+//If the age is too great, the enemy will undraw itself
+//
 float Enemy::age() {
 	return (ofGetElapsedTimeMillis() - birthtime);
 }
 
+//Adds new enemies to the vector
+//
 void EnemySystem::add(Enemy s) {
 	enemies.push_back(s);
 }
 
+//Removes specific enemies
+//
 void EnemySystem::remove(int i) {
 	enemies.erase(enemies.begin() + i);
     enemies_killed++;
 }
 
+//Uses the Vector point to determine if other objects are nearby.
+//If there are other objects, then we will remove the ship from the EnemySystem.
+//
 bool EnemySystem::removeNear(ofVec3f point, float dist) {
 	vector<Enemy>::iterator s = enemies.begin();
 	vector<Enemy>::iterator tmp;
-
+    
 	while (s != enemies.end()) {
 		ofVec3f v = s->trans - point;
-		if (v.length() < dist) {
+        //removes enimies that share a position with the bullet
+        if (v.length() < dist) {
 			tmp = enemies.erase(s);
 			s = tmp;
             enemies_killed++;
-//            cout << enemies_killed << endl;
             explosion.play();
             return true;
 		}
@@ -75,6 +84,7 @@ void EnemySystem::update() {
 	vector<Enemy>::iterator s = enemies.begin();
 	vector<Enemy>::iterator tmp;
 
+    //Destroy enemies that have lived past their life
 	while (s != enemies.end()) {
 		if (s->lifespan != -1 && s->age() > s->lifespan) {
 			tmp = enemies.erase(s);
@@ -89,6 +99,9 @@ void EnemySystem::update() {
 		enemies[i].trans += enemies[i].velocity / ofGetFrameRate();
 	}
     
+    //Win condtion (I'm tempted to change this to a higher number)
+    //*This is how I could implement more levels
+    //
     if (enemies_killed >= 10)
     {
         levelFinish = true;

@@ -22,6 +22,7 @@ void ofApp::setup(){
     bullet.trans.set(500,500);
     bullets = new vector<Bullet*>();
 
+    // The gui isn't being drawn, but I use it for testing purposes.
 	gui.setup();
 	gui.add(rate.setup("rate", 1, 1, 10));
 	gui.add(life.setup("life", 6.75, .1, 10));
@@ -46,8 +47,9 @@ void ofApp::update() {
 //--------------------------------------------------------------
 void ofApp::draw(){
     background.draw(0, 0, ofGetWindowWidth(), ofGetWindowHeight());
-    
     sprite.draw();
+    
+    //checks each bullet for collisions and if it has left the screen (ie. lifespan)
 	for (int i = 0; i < bullets->size(); i++) {
 		Bullet* b = bullets->at(i);
 		b->trans.y -= 5;
@@ -62,11 +64,13 @@ void ofApp::draw(){
         
     }
     emitter->draw();
-    
-    gui.draw();
-
+    //gui.draw();
 }
 
+/* Each bullet is checking its posistion against the vector of Enemies.
+ If the distance of the bullet and any enemy would cause a collision in the nect frame,
+ then the ship is "destroyed" and both the ship and vecotr are removed from their respective vectors.
+ */
 void ofApp::checkCollisions(Bullet* b) {
     float dist = emitter->maxDistPerFrame();
     if(emitter->sys->removeNear(b->trans, emitter->maxDistPerFrame()) )
@@ -88,9 +92,9 @@ void ofApp::mouseMoved(int x, int y ){
 void ofApp::mouseDragged(int x, int y, int button){
     ofPoint mouse_cur = ofPoint(x, 0);
     ofVec3f delta = mouse_cur - mouse_last;
-    sprite.trans += delta/2;
+    sprite.trans += delta;
     sprite.trans.y = ofGetWindowHeight() - 90;
-    sprite.start_point += delta/2;
+    sprite.start_point += delta;
     sprite.start_point.y= ofGetWindowHeight() - 90 ;
     mouse_last = mouse_cur;
 }

@@ -1,17 +1,10 @@
 #pragma once
-//----------------------------------------------------------------------------------
-//
-// Basic Sprite Emitter Class
-//
-//
 
 #include "baseObject.h"
 #include "enemy.hpp"
 
+//  Emmiter that will handle creating and launching enemies.
 
-//  General purpose Emitter class for emitting sprites
-//  This works similar to a Particle emitter
-//
 class Emitter : public BaseObject {
 public:
 	Emitter(EnemySystem *);
@@ -29,11 +22,4 @@ public:
 	float lifespan;
 	bool started;
 	float lastSpawned;
-	ofImage childImage;
-	ofImage image;
-	bool drawable;
-	bool haveChildImage;
-	bool haveImage;
-	float width, height;
-	float childWidth, childHeight;
 };

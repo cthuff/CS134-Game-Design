@@ -12,6 +12,7 @@
 #include "bullet.hpp"
 #include "baseObject.h"
 
+//Controls the turret class the player will be using
 
 class Player : public BaseObject {
 
@@ -23,7 +24,7 @@ public:
     void moveSprite(MoveDir);
     void stopSprite();
 
-    float speed;    // in screenspace coordinates per second  (pixels)
+    float speed;
     ofImage image;
     MoveDir moveDir;
     

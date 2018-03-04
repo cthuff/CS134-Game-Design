@@ -11,6 +11,8 @@
 #include "ofMain.h"
 #include "baseObject.h"
 
+//Creates a new object that the player will fire at the enemies
+
 class Bullet : public BaseObject {
     
 public:
