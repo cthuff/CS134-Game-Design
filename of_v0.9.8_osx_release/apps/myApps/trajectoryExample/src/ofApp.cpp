@@ -44,7 +44,10 @@ void ofApp::launchParticle() {
 
 	// Create initialize a new particle with values from sliders
 	//
+    float time = ofGetElapsedTimeMillis();
 	Particle* particle = new Particle();
+    particle->birthtime = time;
+    particle->lifespan = 5;
 	particle->velocity.set(velocity);
 	particle->acceleration.set(0, -gravity, 0);
 	particle->damping = damping;
@@ -111,6 +114,11 @@ void ofApp::draw(){
 	// draw particle(s) here..
     for (int i = 0; i < particles.size(); i++){
         Particle* p = particles.at(i);
+        if(ofGetElapsedTimeMillis() - p->birthtime > (p->lifespan * 1000))
+        {
+            particles.erase(particles.begin() + i);
+            break;
+        }
         p->draw();
     }
 	
