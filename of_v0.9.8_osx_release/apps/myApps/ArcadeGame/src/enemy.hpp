@@ -36,10 +36,12 @@ public:
 	void add(Enemy);
 	void remove(int);
 	void update();
+    void setLevelKills(int num);
 	bool removeNear(ofVec3f point, float dist);
 	void draw();
 	vector<Enemy> enemies;
     float enemies_killed;
+    float level_kills;
     bool levelFinish;
     ofSoundPlayer explosion;
 

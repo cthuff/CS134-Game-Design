@@ -14,7 +14,7 @@ Enemy::Enemy() {
     trans.y = 0;
     scale.x = 1;
     scale.y = 1;
-    rot = 0;
+    rot = 27;
     speed = 0;
     bSelected = false;
 	velocity = ofVec3f(0, 0, 0);
@@ -32,7 +32,8 @@ void Enemy::draw() {
 //
 EnemySystem::EnemySystem() {
     enemies_killed = 0;
-    levelFinish == false;
+    level_kills = 10;
+    levelFinish = false;
     explosion.load("sounds/explosion.mp3");
 }
 
@@ -47,6 +48,11 @@ float Enemy::age() {
 //
 void EnemySystem::add(Enemy s) {
 	enemies.push_back(s);
+}
+
+void EnemySystem::setLevelKills(int num)
+{
+    level_kills = num;
 }
 
 //Removes specific enemies
@@ -103,13 +109,14 @@ void EnemySystem::update() {
     //Win condtion (I'm tempted to change this to a higher number)
     //*This is how I could implement more levels
     //
-    if (enemies_killed >= 10)
+    if (enemies_killed >= level_kills)
     {
         levelFinish = true;
         ofSystemAlertDialog("Congratulations! You won!");
         enemies.clear();
         levelFinish = false;
         enemies_killed = 0;
+        setLevelKills(level_kills + 10);
     }
 }
 
