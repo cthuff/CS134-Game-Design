@@ -16,6 +16,7 @@ class ParticleSystem {
 public:
 	void add(const Particle &);
 	void addForce(ParticleForce *);
+    void removeForce();
 	void remove(int);
 	void update();
 	int removeNear(const ofVec3f & point, float dist);

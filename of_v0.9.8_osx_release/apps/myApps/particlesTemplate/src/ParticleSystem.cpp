@@ -11,6 +11,10 @@ void ParticleSystem::addForce(ParticleForce *f) {
 	forces.push_back(f);
 }
 
+void ParticleSystem::removeForce() {
+    forces.pop_back();
+}
+
 void ParticleSystem::remove(int i) {
 	particles.erase(particles.begin() + i);
 }

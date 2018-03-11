@@ -39,5 +39,7 @@ class ofApp : public ofBaseApp{
 		ofxVec3Slider velocity;
 		ofxFloatSlider lifespan;
 		ofxFloatSlider rate;
+        ofxVec3Slider turbulence1;
+        ofxVec3Slider turbulence2;
 		ofxPanel gui;
 };

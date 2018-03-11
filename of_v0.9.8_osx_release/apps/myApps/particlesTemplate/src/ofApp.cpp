@@ -31,6 +31,9 @@ void ofApp::setup(){
 	gui.add(damping.setup("Damping", .99, .1, 1.0));
     gui.add(gravity.setup("Gravity", 10, 1, 20));
 	gui.add(radius.setup("Radius", .1, .01, .3));
+    
+    gui.add(turbulence1.setup("turbulence1", ofVec3f(-2, -1, -3), ofVec3f(-10, -10, -10), ofVec3f(10, 10, 10)));
+    gui.add(turbulence2.setup("turbulence2", ofVec3f(1, 2, 5), ofVec3f(-10, -10, -10), ofVec3f(10, 10, 10)));
 	bHide = false;
 
     emitter.start();
@@ -48,6 +51,8 @@ void ofApp::update() {
     emitter.setRate(rate);
     emitter.setLifespan(lifespan);
     emitter.setVelocity(velocity);
+    emitter.sys->removeForce();
+    emitter.sys->addForce(new TurbulenceForce(turbulence1,turbulence2));
     emitter.update();
     emitter.sys->update();
 }

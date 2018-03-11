@@ -22,11 +22,13 @@ public:
 	void setVelocity(const ofVec3f &vel) { velocity = vel; }
 	void setRate(const float r) { rate = r; }
 	void setParticleRadius(const float r) { particleRadius = r; }
+    void setTurbulence(const ofVec3f t) { turbulence = t;}
 	void setEmitterType(EmitterType t) { type = t; }
 	void update();
 	ParticleSystem *sys;
 	float rate;         // per sec
 	ofVec3f velocity;
+    ofVec3f turbulence;
 	float lifespan;     // sec
 	bool started;
 	float lastSpawned;  // ms
