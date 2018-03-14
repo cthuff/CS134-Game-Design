@@ -1,0 +1,9 @@
+<group>
+	<Initial_Velocity>0, 20, 0</Initial_Velocity>
+	<Lifespan>2</Lifespan>
+	<Rate>25.7875</Rate>
+	<Damping>0.99</Damping>
+	<Gravity>10</Gravity>
+	<Radius>0.1</Radius>
+<group/>
+</group>
