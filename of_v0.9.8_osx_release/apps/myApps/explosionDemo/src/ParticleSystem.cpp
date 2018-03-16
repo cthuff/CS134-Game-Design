@@ -77,8 +77,10 @@ int ParticleSystem::removeNear(const ofVec3f & point, float dist) { return 0; }
 //  draw the particle cloud
 //
 void ParticleSystem::draw() {
-	for (int i = 0; i < particles.size(); i++) {
-		particles[i].draw();
+    if( particles.size() > 0)
+     ofSetColor(particles[0].color);
+	for (int i = 0; i < particles.size(); i++) {       
+        particles[i].draw();
 	}
 }
 

@@ -28,6 +28,7 @@ class ofApp : public ofBaseApp{
 
 		ofEasyCam    cam;
 		ParticleEmitter emitter;
+        ParticleEmitter emitter2;
 
 		// some simple sliders to play with parameters
 		//
