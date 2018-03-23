@@ -27,4 +27,6 @@ class ofApp : public ofBaseApp{
 		ofEasyCam cam;
 		ofSoundPlayer soundPlayer;
 		bool soundFileLoaded = false;
+    
+       ParticleEmitter emitter;
 };

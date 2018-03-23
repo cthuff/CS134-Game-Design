@@ -86,10 +86,10 @@ void ofApp::update() {
 	//
 	// need to call integrate() method in your particles here
 	//
-    for (int i = 0; i < particles.size(); i++){
-        Particle* p = particles.at(i);
-        p->integrate();
-    }
+    //for (int i = 0; i < particles.size(); i++){
+    //    Particle* p = particles.at(i);
+    //    p->integrate();
+    //}
 }
 
 //--------------------------------------------------------------

@@ -7,11 +7,11 @@ Particle::Particle() {
 	//
 	velocity.set(0, 0, 0);
 	acceleration.set(0, 0, 0);
-	position.set(0, 0, 0);
+	position.set(0, 5, 0);
 	forces.set(0, 0, 0);
-	lifespan = 5;
+	lifespan = 100000;
 	birthtime = 0;
-	radius = .1;
+	radius = .5;
 	damping = .99;
 	mass = 1;
 	color = ofColor::aquamarine;

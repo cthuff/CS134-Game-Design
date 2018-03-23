@@ -12,16 +12,24 @@ void ofApp::setup(){
 	ofSetVerticalSync(true);
 	ofSetFrameRate(60);
 	ofSetBackgroundColor(ofColor::black);
-
-	
+    
+    
 	// setup your objects here
+    Particle* particle = new Particle();
+    emitter.setEmitterType(EmitterType::DirectionalEmitter);
+    emitter.sys->add(*particle);
+    emitter.sys->addForce(new ThrustForce(ofVec3f(0,0,0)));
+    emitter.start();
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
 
 	// udpate your objects here
-
+    emitter.update();
+//    for (auto &&p: emitter.sys->particles) {
+//        p.integrate();
+//    }
 }
 
 //--------------------------------------------------------------
@@ -39,7 +47,11 @@ void ofApp::draw(){
 		ofPopMatrix();
 
 		// draw your objects here
-
+        emitter.draw();
+//    cout << emitter.sys->particles.size() << endl;
+      for (auto &&p: emitter.sys->particles) {
+            p.draw();
+        }
 	cam.end();
 }
 
@@ -52,16 +64,20 @@ void ofApp::keyPressed(int key){
 		ofToggleFullscreen();
 		break;
 	case OF_KEY_UP:
-	
+        
+        emitter.sys->addForce(new ThrustForce(ofVec3f(0,.03,.01)));
 		break;
 	case OF_KEY_DOWN:
-	
+        
+        emitter.sys->addForce(new ThrustForce(ofVec3f(0,-.03,-.01)));
 		break;
 	case OF_KEY_LEFT:
-		
+        
+		emitter.sys->addForce(new ThrustForce(ofVec3f(-.03,0,-.01)));
 		break;
 	case OF_KEY_RIGHT:
-		
+        
+		emitter.sys->addForce(new ThrustForce(ofVec3f(.03,0,.01)));
 		break;
 	case 'h':
 		break;
@@ -70,7 +86,26 @@ void ofApp::keyPressed(int key){
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
-	
+    switch (key) {
+        case 'F':
+        case 'f':
+            ofToggleFullscreen();
+            break;
+        case OF_KEY_UP:
+//            emitter.stop();
+            break;
+        case OF_KEY_DOWN:
+//            emitter.stop();
+            break;
+        case OF_KEY_LEFT:
+//            emitter.stop();
+            break;
+        case OF_KEY_RIGHT:
+//            emitter.stop();
+            break;
+        case 'h':
+            break;
+    }
 }
 
 //--------------------------------------------------------------
