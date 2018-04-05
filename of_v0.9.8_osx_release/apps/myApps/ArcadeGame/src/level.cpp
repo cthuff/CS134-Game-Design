@@ -7,3 +7,15 @@
 
 #include "level.hpp"
 
+Level::Level() {
+    currentLevel = 0;
+    levelKills = 10;
+}
+
+void Level::nextLevel(){
+    levelKills = levelKills + 10;
+}
+
+void Level::finalLevel(){
+    currentLevel = 5;
+}

@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include "ofMain.h"
 #include "baseObject.h"
+#include "level.hpp"
 
 class Enemy : public BaseObject {
     
@@ -22,7 +23,6 @@ public:
 	ofVec3f velocity; // in pixels/sec
 	float birthtime; // elapsed time in ms
 	float lifespan;  //  time in ms
-	string name;
 	bool haveImage;
 	float width, height;
 };
@@ -36,7 +36,7 @@ public:
 	void add(Enemy);
 	void remove(int);
 	void update();
-    void setLevelKills(int num);
+    //void setLevelKills(int num);
 	bool removeNear(ofVec3f point, float dist);
 	void draw();
 	vector<Enemy> enemies;
@@ -44,5 +44,5 @@ public:
     float level_kills;
     bool levelFinish;
     ofSoundPlayer explosion;
-
+    Level level;
 };

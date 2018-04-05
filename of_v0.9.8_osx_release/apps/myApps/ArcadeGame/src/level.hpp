@@ -9,3 +9,14 @@
 
 #include <stdio.h>
 #include "ofMain.h"
+
+
+class Level {
+
+public:
+    Level();
+    void nextLevel();
+    void finalLevel();
+    bool currentLevel;
+    int levelKills;
+};

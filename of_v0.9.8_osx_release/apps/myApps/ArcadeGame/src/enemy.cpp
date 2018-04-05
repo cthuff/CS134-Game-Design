@@ -31,8 +31,9 @@ void Enemy::draw() {
 //Initializes the two conditions to finish the game, and loads the sound for enemy collisions
 //
 EnemySystem::EnemySystem() {
+    
     enemies_killed = 0;
-    level_kills = 10;
+    level.levelKills = 10;
     levelFinish = false;
     explosion.load("sounds/explosion.mp3");
 }
@@ -48,11 +49,6 @@ float Enemy::age() {
 //
 void EnemySystem::add(Enemy s) {
 	enemies.push_back(s);
-}
-
-void EnemySystem::setLevelKills(int num)
-{
-    level_kills = num;
 }
 
 //Removes specific enemies
@@ -109,14 +105,15 @@ void EnemySystem::update() {
     //Win condtion (I'm tempted to change this to a higher number)
     //*This is how I could implement more levels
     //
-    if (enemies_killed >= level_kills)
+    if (enemies_killed >= level.levelKills)
     {
         levelFinish = true;
-        ofSystemAlertDialog("Congratulations! You won!");
+        ofSystemAlertDialog("Congratulations! You beat this level!");
         enemies.clear();
         levelFinish = false;
         enemies_killed = 0;
-        setLevelKills(level_kills + 10);
+        level.nextLevel();
+//        setLevelKills(level_kills + 10);
     }
 }
 

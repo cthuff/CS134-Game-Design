@@ -22,7 +22,12 @@ Emitter::Emitter(EnemySystem *enemySys) {
 //  initial velocity, lifespan, birthtime.
 //
 void Emitter::update() {
-	if (!started) return;
+    if(sys->levelFinish == true)
+        started = false;
+    else
+        started = true;
+    
+    if (!started) return;
 
 	float time = ofGetElapsedTimeMillis();
 	if ((time - lastSpawned) > (1000.0 / rate)) {
@@ -43,7 +48,8 @@ void Emitter::update() {
         enemy.image.load("images/enemy.png");
 		sys->add(enemy);
 		lastSpawned = time;
-	}
+    }
+    
 	sys->update();
 }
 
