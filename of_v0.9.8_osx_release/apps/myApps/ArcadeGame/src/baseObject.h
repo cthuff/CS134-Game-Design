@@ -14,5 +14,6 @@ public:
     ofVec2f trans, scale;
     float   rot;
     bool    bSelected;
+    void    setPosition(ofVec3f &);
 };
 
