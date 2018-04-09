@@ -2,7 +2,7 @@
 //  enemy.hpp
 //  ArcadeGame
 //
-//  Created by Craig on 2/21/18.
+//  Created by Craig Huff on 2/21/18.
 //
 
 #pragma once
@@ -37,9 +37,10 @@ public:
 	void add(Enemy);
 	void remove(int);
 	void update();
-    //void setLevelKills(int num);
 	bool removeNear(ofVec3f point, float dist);
 	void draw();
+    void reset();
+    void removeAll();
 	vector<Enemy> enemies;
     float enemies_killed;
     float level_kills;

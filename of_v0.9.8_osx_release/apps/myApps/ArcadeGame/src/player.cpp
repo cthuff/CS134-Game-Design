@@ -83,6 +83,7 @@ void Player::checkCollision(Emitter* emitter) {
     {
         health--;
         emitter->sys->enemies_killed--;
+        emitter->sys->score--;
     }
 }
 

@@ -44,7 +44,7 @@ EnemySystem::EnemySystem() {
     emitter.setLifespan(1);
     emitter.setVelocity(ofVec3f(100, 0, 0));
     emitter.setParticleRadius(10);
-    emitter.start();
+    
 }
 
 //Track the age of the enemy.
@@ -58,6 +58,21 @@ float Enemy::age() {
 //
 void EnemySystem::add(Enemy s) {
 	enemies.push_back(s);
+}
+
+void EnemySystem::reset()
+{
+    removeAll();
+    score = 0;
+    level_kills = 10;
+    enemies_killed = 0;
+    level.currentLevel = 0;
+}
+
+void EnemySystem::removeAll() {
+    vector<Enemy>::iterator s = enemies.begin();
+    while (s != enemies.end())
+        enemies.erase(s);
 }
 
 //Removes specific enemies
@@ -126,21 +141,20 @@ void EnemySystem::update() {
     {
         levelFinish = true;
         ofSystemAlertDialog("Congratulations! You Won! Press okay to start again");
-        enemies.clear();
+        removeAll();
         levelFinish = false;
         enemies_killed = 0;
-        level.levelKills = 0;
+        level.levelKills = 10;
         level.currentLevel = 0;
     }
     else if (enemies_killed >= level.levelKills)
     {
         levelFinish = true;
         ofSystemAlertDialog("You beat this level! Continue....");
-        enemies.clear();
+        removeAll();
         levelFinish = false;
         enemies_killed = 0;
         level.nextLevel();
-//        setLevelKills(level_kills + 10);
     }
     
 }

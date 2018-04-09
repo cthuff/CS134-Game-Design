@@ -1,3 +1,5 @@
+//  Created by Craig Huff on 2/21/18.
+
 #include "ofApp.h"
 
 //--------------------------------------------------------------
@@ -44,6 +46,11 @@ void ofApp::update() {
     emitter->setLifespan(life * 1000);    // convert to milliseconds
     emitter->setVelocity(velocity);
     emitter->update();
+    
+    if(sprite.health <= 0 ){
+        ofSystemAlertDialog("Come on, It's not Rocket Surgery! Try again.");
+        resetGame();
+    }
 }
 
 //--------------------------------------------------------------
@@ -78,6 +85,16 @@ void ofApp::draw(){
     
     //gui.draw();
 }
+
+//Starts the game after the user loses.
+void ofApp::resetGame() {
+    sprite.health = 5;
+    emitter->stop();
+    emitter->sys->reset();
+    emitter->start();
+    bullets->clear();
+}
+
 
 /* Each bullet is checking its posistion against the vector of Enemies.
  If the distance of the bullet and any enemy would cause a collision in the nect frame,

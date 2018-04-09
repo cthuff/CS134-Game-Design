@@ -35,6 +35,7 @@ public:
     void gotMessage(ofMessage msg);
     
     void checkCollisions(Bullet* b);
+    void resetGame();
     
     void updateBullet(Bullet b);
     void moveBullet(MoveDir);
