@@ -33,6 +33,7 @@ void Enemy::draw() {
 EnemySystem::EnemySystem() {
     
     enemies_killed = 0;
+    score = 0;
     level.levelKills = 10;
     levelFinish = false;
     explosion.load("sounds/explosion.mp3");
@@ -84,6 +85,7 @@ bool EnemySystem::removeNear(ofVec3f point, float dist) {
             tmp = enemies.erase(s);
 			s = tmp;
             enemies_killed++;
+            score++;
             emitter.start();
             explosion.play();
             return true;
@@ -120,7 +122,7 @@ void EnemySystem::update() {
     //Win condtion (I'm tempted to change this to a higher number)
     //*This is how I could implement more levels
     //
-    if (level.currentLevel > 5)
+    if (level.currentLevel == 5)
     {
         levelFinish = true;
         ofSystemAlertDialog("Congratulations! You Won! Press okay to start again");

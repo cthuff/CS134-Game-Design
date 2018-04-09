@@ -4,8 +4,9 @@
 void ofApp::setup(){
     ofSetWindowTitle("Rocket Surgery!");
     ofSetVerticalSync(true);
-//    ofSetFullscreen(true);
-    
+
+    font = new ofTrueTypeFont();
+    font->loadFont("fonts/writing.ttf", 40);
     
     emitter = new Emitter(new EnemySystem());
     emitter->trans = (ofVec3f(ofGetWindowWidth() / 2, ofGetWindowHeight() / 2, 0));
@@ -39,7 +40,7 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update() {
     sprite.updateSprite();
-    emitter->setRate(rate);
+    emitter->setRate(emitter->sys->level.currentLevel + 2);
     emitter->setLifespan(life * 1000);    // convert to milliseconds
     emitter->setVelocity(velocity);
     emitter->update();
@@ -50,7 +51,7 @@ void ofApp::draw(){
     
     background.draw(0, 0, ofGetWindowWidth(), ofGetWindowHeight());
     sprite.draw();
-    
+    sprite.checkCollision(emitter);
     //checks each bullet for collisions and if it has left the screen (ie. lifespan)
 	for (int i = 0; i < bullets->size(); i++) {
 		Bullet* b = bullets->at(i);
@@ -65,7 +66,16 @@ void ofApp::draw(){
         }
         
     }
+    
     emitter->draw();
+    string scoreStr = "Score: " + to_string(emitter->sys->score);
+    string healthStr = "Lives: " + to_string(sprite.health);
+    string levelStr = "Level: " + to_string(emitter->sys->level.currentLevel + 1);
+    
+    font->drawString(scoreStr, 20, 40);
+    font->drawString(healthStr, 20, 70);
+    font->drawString(levelStr, 20, 100);
+    
     //gui.draw();
 }
 

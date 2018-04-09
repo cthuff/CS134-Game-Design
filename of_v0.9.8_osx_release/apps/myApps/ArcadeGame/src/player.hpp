@@ -11,6 +11,7 @@
 #include "ofMain.h"
 #include "bullet.hpp"
 #include "baseObject.h"
+#include "emitter.h"
 
 class Player : public BaseObject {
 
@@ -21,8 +22,10 @@ public:
     void updateSprite();
     void moveSprite(MoveDir);
     void stopSprite();
-
+    void checkCollision(Emitter* emitter);
+    
     float speed;
+    int health;
     ofImage image;
     MoveDir moveDir;
     

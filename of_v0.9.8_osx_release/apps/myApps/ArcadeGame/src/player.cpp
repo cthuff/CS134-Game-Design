@@ -9,7 +9,6 @@
 
 #include "player.hpp"
 
-
 Player::Player() {
     trans.x = 0;
     trans.y = 0;
@@ -17,6 +16,7 @@ Player::Player() {
     scale.y = 1;
     rot = 0;
     speed = 0;
+    health = 5;
     bSelected = false;
 }
 
@@ -77,3 +77,12 @@ void Player::moveSprite(MoveDir dir) {
 void Player::stopSprite() {
     moveDir = MoveStop;
 }
+
+void Player::checkCollision(Emitter* emitter) {
+    if(emitter->sys->removeNear(trans, emitter->maxDistPerFrame()) )
+    {
+        health--;
+        emitter->sys->enemies_killed--;
+    }
+}
+

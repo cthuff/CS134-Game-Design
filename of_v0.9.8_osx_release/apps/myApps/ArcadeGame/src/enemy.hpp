@@ -43,6 +43,7 @@ public:
 	vector<Enemy> enemies;
     float enemies_killed;
     float level_kills;
+    int score;
     bool levelFinish;
     ofSoundPlayer explosion;
     ParticleEmitter emitter;

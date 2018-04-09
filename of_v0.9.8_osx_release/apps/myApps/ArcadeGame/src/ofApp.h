@@ -46,6 +46,8 @@ public:
     ofSoundPlayer music;
     bool isUp;
     
+    ofTrueTypeFont* font;
+    
     Player sprite;
     Bullet bullet;
     Enemy enemy;
