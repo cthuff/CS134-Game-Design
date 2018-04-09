@@ -2,7 +2,7 @@
 //  enemy.cpp
 //  ArcadeGame
 //
-//  Created by Craig on 2/21/18.
+//  Created by Craig Huff on 2/21/18.
 //
 //  the enemy that the player will be trying to destroy
 

@@ -2,7 +2,7 @@
 //  player.cpp
 //  ArcadeGame
 //
-//  Created by Craig on 2/21/18.
+//  Created by Craig Huff on 2/21/18.
 //  This is the turret that the player controls.
 //  It will fire bullets at the enemies as the come on the screen.
 //

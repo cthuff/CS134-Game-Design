@@ -1,3 +1,10 @@
+//
+//  ParticleSystem.cpp
+//  ArcadeGame
+//
+//  Created by Craig Huff on 4/8/18.
+//  Creates the particle system that is used for explosions 
+
 #include "ParticleSystem.h"
 
 void ParticleSystem::add(const Particle &p) {

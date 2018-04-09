@@ -2,8 +2,9 @@
 //  level.cpp
 //  ArcadeGame
 //
-//  Created by Craig on 3/4/18.
+//  Created by Craig Huff on 3/4/18.
 //
+//  Level to keep track of requirements for each level
 
 #include "level.hpp"
 

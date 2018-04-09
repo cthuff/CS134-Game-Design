@@ -1,3 +1,10 @@
+//
+//  ParticleEmitter.cpp
+//  ArcadeGame
+//
+//  Created by Craig Huff on 4/8/18.
+//
+//  An emitter that is used for explosions. Takes particles from the particle system and draws them in an explosive way.
 
 #include "ParticleEmitter.h"
 
@@ -140,9 +147,6 @@ void ParticleEmitter::spawn(float time) {
 	particle.radius = particleRadius;
 	particle.mass = mass;
 	particle.damping = damping;
-//    particle.color = particleColor;
-
-	// add to system
-	//
+    //add to the system
 	sys->add(particle);
 }

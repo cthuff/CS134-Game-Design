@@ -1,3 +1,10 @@
+//
+//  particle.h
+//  ArcadeGame
+//
+//  Created by Craig Huff on 4/8/18.
+//  Particles used in the Particle System/Emitter
+
 #pragma once
 
 #include "ofMain.h"

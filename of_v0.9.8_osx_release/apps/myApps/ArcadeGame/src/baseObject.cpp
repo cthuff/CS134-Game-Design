@@ -1,3 +1,10 @@
+//
+//  baseObject.cpp
+//  ArcadeGame
+//
+//  Created by Craig Huff on 4/8/18.
+//
+
 #pragma once
 #include "baseObject.h"
 #include "ofMain.h"

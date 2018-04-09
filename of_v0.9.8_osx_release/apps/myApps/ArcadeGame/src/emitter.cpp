@@ -2,7 +2,7 @@
 //  emitter.cpp
 //  ArcadeGame
 //
-//  Created by Craig on 2/26/18.
+//  Created by Craig Huff on 2/26/18.
 //
 //  The emitter will handle spawning all of the enemies
 //  and keeping track of where they are

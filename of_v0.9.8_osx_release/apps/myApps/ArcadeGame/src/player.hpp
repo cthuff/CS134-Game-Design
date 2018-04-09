@@ -2,7 +2,7 @@
 //  player.hpp
 //  ArcadeGame
 //
-//  Created by Craig on 2/21/18.
+//  Created by Craig Huff on 2/21/18.
 //  Controls the turret class the player will be using
 
 #pragma once

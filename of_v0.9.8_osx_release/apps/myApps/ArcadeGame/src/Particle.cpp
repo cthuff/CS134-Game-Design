@@ -1,3 +1,11 @@
+//
+//  particle.cpp
+//  ArcadeGame
+//
+//  Created by Craig Huff on 4/8/18.
+//  An individual particle to be used in a particle system
+
+
 #include "Particle.h"
 
 

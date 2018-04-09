@@ -2,7 +2,7 @@
 //  ofApp.h
 //  ArcadeGame
 //
-//  Created by Craig on 2/26/18.
+//  Created by Craig Huff on 2/26/18.
 //
 
 #pragma once

@@ -2,7 +2,7 @@
 //  bullet.hpp
 //  ArcadeGame
 //
-//  Created by Craig on 2/26/18.
+//  Created by Craig Huff on 2/26/18.
 //
 //  Creates a new object that the player will fire at the enemies
 

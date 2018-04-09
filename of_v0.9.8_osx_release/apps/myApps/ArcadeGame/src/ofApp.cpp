@@ -1,4 +1,9 @@
-//  Created by Craig Huff on 2/21/18.
+//
+//  ofApp.cpp
+//  ArcadeGame
+//
+//  Created by Craig Huff on 2/26/18.
+//
 
 #include "ofApp.h"
 

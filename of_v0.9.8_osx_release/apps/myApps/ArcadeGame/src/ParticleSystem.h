@@ -1,5 +1,11 @@
+//
+//  ParticleSystem.h
+//  ArcadeGame
+//
+//  Created by Craig Huff on 4/8/18.
+//
+
 #pragma once
-//  Kevin M. Smith - CS 134 SJSU
 
 #include "ofMain.h"
 #include "Particle.h"
