@@ -66,7 +66,7 @@ void EnemySystem::reset()
     score = 0;
     level_kills = 10;
     enemies_killed = 0;
-    level.currentLevel = 0;
+    level.currentLevel = 1;
 }
 
 void EnemySystem::removeAll() {
@@ -137,24 +137,26 @@ void EnemySystem::update() {
     //Win condtion (I'm tempted to change this to a higher number)
     //*This is how I could implement more levels
     //
-    if (level.currentLevel == 5)
+    
+    if (enemies_killed >= level.levelKills)
     {
         levelFinish = true;
-        ofSystemAlertDialog("Congratulations! You Won! Press okay to start again");
-        removeAll();
-        levelFinish = false;
-        enemies_killed = 0;
-        level.levelKills = 10;
-        level.currentLevel = 0;
-    }
-    else if (enemies_killed >= level.levelKills)
-    {
-        levelFinish = true;
-        ofSystemAlertDialog("You beat this level! Continue....");
-        removeAll();
-        levelFinish = false;
-        enemies_killed = 0;
         level.nextLevel();
+        if (level.currentLevel == 6)
+        {
+            ofSystemAlertDialog("Congratulations! You Won! Press okay to start again");
+            removeAll();
+            levelFinish = false;
+            enemies_killed = 0;
+            level.levelKills = 10;
+            level.currentLevel = 0;
+        }
+        else {
+            ofSystemAlertDialog("You beat this level! Continue....");
+            removeAll();
+            levelFinish = false;
+            enemies_killed = 0;
+        }
     }
     
 }

@@ -9,8 +9,8 @@
 #include "level.hpp"
 
 Level::Level() {
-    currentLevel = 0;
-    levelKills = 10;
+    currentLevel = 1;
+    levelKills = currentLevel * 10;
 }
 
 void Level::nextLevel(){

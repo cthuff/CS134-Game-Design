@@ -82,7 +82,7 @@ void ofApp::draw(){
     emitter->draw();
     string scoreStr = "Score: " + to_string(emitter->sys->score);
     string healthStr = "Lives: " + to_string(sprite.health);
-    string levelStr = "Level: " + to_string(emitter->sys->level.currentLevel + 1);
+    string levelStr = "Level: " + to_string(emitter->sys->level.currentLevel);
     
     font->drawString(scoreStr, 20, 40);
     font->drawString(healthStr, 20, 70);
