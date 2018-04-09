@@ -36,6 +36,14 @@ EnemySystem::EnemySystem() {
     level.levelKills = 10;
     levelFinish = false;
     explosion.load("sounds/explosion.mp3");
+    
+    emitter.setOneShot(true);
+    emitter.setEmitterType(RadialEmitter);
+    emitter.setGroupSize(6);
+    emitter.setLifespan(1);
+    emitter.setVelocity(ofVec3f(100, 0, 0));
+    emitter.setParticleRadius(10);
+    emitter.start();
 }
 
 //Track the age of the enemy.
@@ -69,9 +77,14 @@ bool EnemySystem::removeNear(ofVec3f point, float dist) {
 		ofVec3f v = s->trans - point;
         //removes enimies that share a position with the bullet
         if (v.length() < dist) {
-			tmp = enemies.erase(s);
+            emitter.trans = point;
+            emitter.position = emitter.trans;
+            emitter.update();
+            cout << emitter.position << endl;
+            tmp = enemies.erase(s);
 			s = tmp;
             enemies_killed++;
+            emitter.start();
             explosion.play();
             return true;
 		}
@@ -82,7 +95,9 @@ bool EnemySystem::removeNear(ofVec3f point, float dist) {
 
 
 void EnemySystem::update() {
-
+    
+    emitter.update();
+    
 	if (enemies.size() == 0) return;
 	vector<Enemy>::iterator s = enemies.begin();
 	vector<Enemy>::iterator tmp;
@@ -105,16 +120,27 @@ void EnemySystem::update() {
     //Win condtion (I'm tempted to change this to a higher number)
     //*This is how I could implement more levels
     //
-    if (enemies_killed >= level.levelKills)
+    if (level.currentLevel > 5)
     {
         levelFinish = true;
-        ofSystemAlertDialog("Congratulations! You beat this level!");
+        ofSystemAlertDialog("Congratulations! You Won! Press okay to start again");
+        enemies.clear();
+        levelFinish = false;
+        enemies_killed = 0;
+        level.levelKills = 0;
+        level.currentLevel = 0;
+    }
+    else if (enemies_killed >= level.levelKills)
+    {
+        levelFinish = true;
+        ofSystemAlertDialog("You beat this level! Continue....");
         enemies.clear();
         levelFinish = false;
         enemies_killed = 0;
         level.nextLevel();
 //        setLevelKills(level_kills + 10);
     }
+    
 }
 
 //  Render all the sprites
@@ -124,4 +150,5 @@ void EnemySystem::draw() {
     for (int i = 0; i < enemies.size(); i++) {
 		enemies[i].draw();
 	}
+    emitter.draw();
 }

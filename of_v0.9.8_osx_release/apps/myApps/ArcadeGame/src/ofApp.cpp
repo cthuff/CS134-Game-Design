@@ -6,6 +6,11 @@ void ofApp::setup(){
     ofSetVerticalSync(true);
 //    ofSetFullscreen(true);
     
+    
+    emitter = new Emitter(new EnemySystem());
+    emitter->trans = (ofVec3f(ofGetWindowWidth() / 2, ofGetWindowHeight() / 2, 0));
+    emitter->start();
+    
     background.load("images/background.png");
     sprite.image.load("images/USS_Danger.png");
     bullet.image.load("images/bullet.png");
@@ -27,11 +32,7 @@ void ofApp::setup(){
 	gui.add(rate.setup("rate", 1, 1, 10));
 	gui.add(life.setup("life", 6.75, .1, 10));
 	gui.add(velocity.setup("velocity", ofVec3f(100, 30, 0), ofVec3f(-500, -500, -500), ofVec3f(500, 500, 500)));
-    
-    emitter = new Emitter(new EnemySystem());
-    emitter->trans = (ofVec3f(ofGetWindowWidth() / 2, ofGetWindowHeight() / 2, 0));
-    emitter->start();
-    
+
     
 }
 
@@ -46,6 +47,7 @@ void ofApp::update() {
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+    
     background.draw(0, 0, ofGetWindowWidth(), ofGetWindowHeight());
     sprite.draw();
     

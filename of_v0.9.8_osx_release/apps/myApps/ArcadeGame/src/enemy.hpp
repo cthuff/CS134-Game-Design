@@ -11,6 +11,7 @@
 #include "ofMain.h"
 #include "baseObject.h"
 #include "level.hpp"
+#include "ParticleEmitter.h"
 
 class Enemy : public BaseObject {
     
@@ -44,5 +45,6 @@ public:
     float level_kills;
     bool levelFinish;
     ofSoundPlayer explosion;
+    ParticleEmitter emitter;
     Level level;
 };

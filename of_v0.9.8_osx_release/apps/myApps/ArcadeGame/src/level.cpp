@@ -14,6 +14,7 @@ Level::Level() {
 
 void Level::nextLevel(){
     levelKills = levelKills + 10;
+    currentLevel = currentLevel + 1;
 }
 
 void Level::finalLevel(){

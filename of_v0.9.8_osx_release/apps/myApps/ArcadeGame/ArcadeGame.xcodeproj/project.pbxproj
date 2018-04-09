@@ -11,7 +11,10 @@
 		1CD33E884D9E3358252E82A1 /* ofxToggle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 907C5B5E104864A2D3A25745 /* ofxToggle.cpp */; };
 		35C65FFBB8537510DFA24AEC /* emitter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A7BA073EE566E318DA6422F /* emitter.cpp */; };
 		441D072B204CA75000E4F866 /* level.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 441D0729204CA75000E4F866 /* level.cpp */; };
-		44E96A8C20744D8800ECD38E /* explosion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 44E96A8A20744D8800ECD38E /* explosion.cpp */; };
+		4441C7C9207ADDA4005981FF /* ParticleEmitter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4441C7C4207ADD95005981FF /* ParticleEmitter.cpp */; };
+		4441C7CA207ADDA4005981FF /* Particle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4441C7C5207ADD9B005981FF /* Particle.cpp */; };
+		4441C7CB207ADDA4005981FF /* ParticleSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4441C7C7207ADDA1005981FF /* ParticleSystem.cpp */; };
+		4441C7CD207ADEC1005981FF /* baseObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4441C7CC207ADEC1005981FF /* baseObject.cpp */; };
 		483908258D00B98B4BE69F07 /* ofxLabel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 78D67A00EB899FAC09430597 /* ofxLabel.cpp */; };
 		5A01E0ABF1D271CBE4448B34 /* bullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C8A7F6CA3A1990474429EDAC /* bullet.cpp */; };
 		5CBB2AB3A60F65431D7B555D /* ofxButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C88333E71C9457E441C33474 /* ofxButton.cpp */; };
@@ -67,8 +70,13 @@
 		2834D88A62CD23F3DE2C47D1 /* ofxButton.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxButton.h; path = ../../../addons/ofxGui/src/ofxButton.h; sourceTree = SOURCE_ROOT; };
 		441D0729204CA75000E4F866 /* level.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = level.cpp; sourceTree = "<group>"; };
 		441D072A204CA75000E4F866 /* level.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = level.hpp; sourceTree = "<group>"; };
-		44E96A8A20744D8800ECD38E /* explosion.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = explosion.cpp; sourceTree = "<group>"; };
-		44E96A8B20744D8800ECD38E /* explosion.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = explosion.hpp; sourceTree = "<group>"; };
+		4441C7C3207ADD92005981FF /* Particle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Particle.h; sourceTree = "<group>"; };
+		4441C7C4207ADD95005981FF /* ParticleEmitter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ParticleEmitter.cpp; sourceTree = "<group>"; };
+		4441C7C5207ADD9B005981FF /* Particle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Particle.cpp; sourceTree = "<group>"; };
+		4441C7C6207ADD9F005981FF /* ParticleEmitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParticleEmitter.h; sourceTree = "<group>"; };
+		4441C7C7207ADDA1005981FF /* ParticleSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ParticleSystem.cpp; sourceTree = "<group>"; };
+		4441C7C8207ADDA4005981FF /* ParticleSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParticleSystem.h; sourceTree = "<group>"; };
+		4441C7CC207ADEC1005981FF /* baseObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = baseObject.cpp; sourceTree = "<group>"; };
 		52AFA1F08C420992CAAAE648 /* ofxSlider.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxSlider.h; path = ../../../addons/ofxGui/src/ofxSlider.h; sourceTree = SOURCE_ROOT; };
 		602A81F060D9838DFF60C466 /* bullet.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = bullet.hpp; path = src/bullet.hpp; sourceTree = SOURCE_ROOT; };
 		78D67A00EB899FAC09430597 /* ofxLabel.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxLabel.cpp; path = ../../../addons/ofxGui/src/ofxLabel.cpp; sourceTree = SOURCE_ROOT; };
@@ -179,22 +187,27 @@
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				0C510CD244E8F31BBE6C7F8E /* baseObject.h */,
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
-				90CC9900BE868EEF1A3CD6C1 /* enemy.cpp */,
-				1E9058CD1B2C45E875822A8D /* enemy.hpp */,
-				BCDE8C9BEBCF137ABA15868F /* player.cpp */,
-				FE3A3345BA1EF448649CE3C1 /* player.hpp */,
-				0A7BA073EE566E318DA6422F /* emitter.cpp */,
-				0CAE2F887602FE2449052FB8 /* emitter.h */,
+				4441C7CC207ADEC1005981FF /* baseObject.cpp */,
+				0C510CD244E8F31BBE6C7F8E /* baseObject.h */,
 				C8A7F6CA3A1990474429EDAC /* bullet.cpp */,
 				602A81F060D9838DFF60C466 /* bullet.hpp */,
+				0A7BA073EE566E318DA6422F /* emitter.cpp */,
+				0CAE2F887602FE2449052FB8 /* emitter.h */,
+				90CC9900BE868EEF1A3CD6C1 /* enemy.cpp */,
+				1E9058CD1B2C45E875822A8D /* enemy.hpp */,
 				441D0729204CA75000E4F866 /* level.cpp */,
 				441D072A204CA75000E4F866 /* level.hpp */,
-				44E96A8A20744D8800ECD38E /* explosion.cpp */,
-				44E96A8B20744D8800ECD38E /* explosion.hpp */,
+				4441C7C5207ADD9B005981FF /* Particle.cpp */,
+				4441C7C3207ADD92005981FF /* Particle.h */,
+				4441C7C4207ADD95005981FF /* ParticleEmitter.cpp */,
+				4441C7C6207ADD9F005981FF /* ParticleEmitter.h */,
+				4441C7C7207ADDA1005981FF /* ParticleSystem.cpp */,
+				4441C7C8207ADDA4005981FF /* ParticleSystem.h */,
+				BCDE8C9BEBCF137ABA15868F /* player.cpp */,
+				FE3A3345BA1EF448649CE3C1 /* player.hpp */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -302,20 +315,23 @@
 			files = (
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
+				4441C7C9207ADDA4005981FF /* ParticleEmitter.cpp in Sources */,
 				FF24E69E085B93726F8F5E06 /* player.cpp in Sources */,
 				35C65FFBB8537510DFA24AEC /* emitter.cpp in Sources */,
 				03A7C7A7915456622C905193 /* enemy.cpp in Sources */,
 				5A01E0ABF1D271CBE4448B34 /* bullet.cpp in Sources */,
 				856AA354D08AB4B323081444 /* ofxBaseGui.cpp in Sources */,
+				4441C7CB207ADDA4005981FF /* ParticleSystem.cpp in Sources */,
 				B56FE57CC35806596D38118C /* ofxSliderGroup.cpp in Sources */,
 				1CD33E884D9E3358252E82A1 /* ofxToggle.cpp in Sources */,
 				5CBB2AB3A60F65431D7B555D /* ofxButton.cpp in Sources */,
+				4441C7CD207ADEC1005981FF /* baseObject.cpp in Sources */,
 				B266578FC55D23BFEBC042E7 /* ofxGuiGroup.cpp in Sources */,
 				483908258D00B98B4BE69F07 /* ofxLabel.cpp in Sources */,
+				4441C7CA207ADDA4005981FF /* Particle.cpp in Sources */,
 				F285EB3169F1566CA3D93C20 /* ofxPanel.cpp in Sources */,
 				837220E80EB56CD44AD27F2A /* ofxSlider.cpp in Sources */,
 				441D072B204CA75000E4F866 /* level.cpp in Sources */,
-				44E96A8C20744D8800ECD38E /* explosion.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

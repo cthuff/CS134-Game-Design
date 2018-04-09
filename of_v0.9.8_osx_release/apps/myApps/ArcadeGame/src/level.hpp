@@ -17,6 +17,6 @@ public:
     Level();
     void nextLevel();
     void finalLevel();
-    bool currentLevel;
+    int currentLevel;
     int levelKills;
 };
