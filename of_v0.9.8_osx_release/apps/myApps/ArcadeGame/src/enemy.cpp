@@ -96,7 +96,7 @@ bool EnemySystem::removeNear(ofVec3f point, float dist) {
             emitter.trans = point;
             emitter.position = emitter.trans;
             emitter.update();
-            cout << emitter.position << endl;
+            //cout << emitter.position << endl;
             tmp = enemies.erase(s);
 			s = tmp;
             enemies_killed++;

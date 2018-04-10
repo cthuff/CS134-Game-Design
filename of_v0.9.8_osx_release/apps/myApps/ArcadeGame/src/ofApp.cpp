@@ -27,7 +27,7 @@ void ofApp::setup(){
     music.setLoop(true);
     music.play();
     
-    sprite.start_point = ofVec3f(70, ofGetWindowHeight() - 90);
+    sprite.start_point = ofVec3f(ofGetWindowWidth() / 2, ofGetWindowHeight() - 90);
     sprite.finish_point = ofVec3f(650, 600);
     sprite.trans.set(sprite.start_point);
     sprite.speed = 120;   // in pixels per second (screenspace 1 unit = 1 pixel)
@@ -155,21 +155,10 @@ void ofApp::mouseExited(int x, int y){
 
 void ofApp::keyPressed(int key) {
     switch (key) {
-        case 'C':
-        case 'c':
-            break;
+
         case 'F':
         case 'f':
             ofToggleFullscreen();
-            break;
-        case 'H':
-        case 'h':
-            break;
-        case 'r':
-            break;
-        case 's':
-            break;
-        case 'u':
             break;
         case ' ':
             if(isUp)
