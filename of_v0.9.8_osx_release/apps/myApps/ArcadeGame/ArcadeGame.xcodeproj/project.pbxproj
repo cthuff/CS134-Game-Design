@@ -15,6 +15,7 @@
 		4441C7CA207ADDA4005981FF /* Particle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4441C7C5207ADD9B005981FF /* Particle.cpp */; };
 		4441C7CB207ADDA4005981FF /* ParticleSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4441C7C7207ADDA1005981FF /* ParticleSystem.cpp */; };
 		4441C7CD207ADEC1005981FF /* baseObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4441C7CC207ADEC1005981FF /* baseObject.cpp */; };
+		44D6F3DA207DA39400646554 /* RocketSurgery.icns in CopyFiles */ = {isa = PBXBuildFile; fileRef = 44D6F3D9207DA39400646554 /* RocketSurgery.icns */; };
 		483908258D00B98B4BE69F07 /* ofxLabel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 78D67A00EB899FAC09430597 /* ofxLabel.cpp */; };
 		5A01E0ABF1D271CBE4448B34 /* bullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C8A7F6CA3A1990474429EDAC /* bullet.cpp */; };
 		5CBB2AB3A60F65431D7B555D /* ofxButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C88333E71C9457E441C33474 /* ofxButton.cpp */; };
@@ -51,8 +52,9 @@
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
-			dstSubfolderSpec = 10;
+			dstSubfolderSpec = 7;
 			files = (
+				44D6F3DA207DA39400646554 /* RocketSurgery.icns in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +80,7 @@
 		4441C7C8207ADDA4005981FF /* ParticleSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParticleSystem.h; sourceTree = "<group>"; };
 		4441C7CC207ADEC1005981FF /* baseObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = baseObject.cpp; sourceTree = "<group>"; };
 		44D6F3D4207D8F8800646554 /* UserDefaultsManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserDefaultsManager.h; sourceTree = "<group>"; };
+		44D6F3D9207DA39400646554 /* RocketSurgery.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = RocketSurgery.icns; path = bin/data/RocketSurgery.icns; sourceTree = "<group>"; };
 		52AFA1F08C420992CAAAE648 /* ofxSlider.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxSlider.h; path = ../../../addons/ofxGui/src/ofxSlider.h; sourceTree = SOURCE_ROOT; };
 		602A81F060D9838DFF60C466 /* bullet.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = bullet.hpp; path = src/bullet.hpp; sourceTree = SOURCE_ROOT; };
 		78D67A00EB899FAC09430597 /* ofxLabel.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxLabel.cpp; path = ../../../addons/ofxGui/src/ofxLabel.cpp; sourceTree = SOURCE_ROOT; };
@@ -177,6 +180,7 @@
 			children = (
 				E4B6FCAD0C3E899E008CF71C /* openFrameworks-Info.plist */,
 				E4EB6923138AFD0F00A09F29 /* Project.xcconfig */,
+				44D6F3D9207DA39400646554 /* RocketSurgery.icns */,
 				E4B69E1C0A3A1BDC003C02F2 /* src */,
 				E4EEC9E9138DF44700A80321 /* openFrameworks */,
 				BB4B014C10F69532006C3DED /* addons */,
@@ -251,6 +255,9 @@
 		E4B69B4C0A3A1720003C02F2 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				KnownAssetTags = (
+					New,
+				);
 				LastUpgradeCheck = 0600;
 				TargetAttributes = {
 					E4B69B5A0A3A1756003C02F2 = {
@@ -450,7 +457,7 @@
 					src,
 					../../../addons/ofxGui/src,
 				);
-				ICON = "$(ICON_NAME_DEBUG)";
+				ICON = RocketSurgery.icns;
 				ICON_FILE = "$(ICON_FILE_PATH)$(ICON)";
 				INFOPLIST_FILE = "openFrameworks-Info.plist";
 				INSTALL_PATH = /Applications;
