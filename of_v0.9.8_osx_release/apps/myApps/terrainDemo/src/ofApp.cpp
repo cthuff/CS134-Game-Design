@@ -19,13 +19,12 @@
 //  Please document/comment all of your work !
 //  Have Fun !!
 //
-//  Student Name:   < Your Name goes Here >
-//  Date: <date of last version>
+//  Student Name:   < Craig Huff >
+//  Date: <April 24th, 2018>
 
 
 #include "ofApp.h"
 #include "Util.h"
-
 
 
 //--------------------------------------------------------------
@@ -39,7 +38,7 @@ void ofApp::setup(){
 	bCtrlKeyDown = false;
 	bRoverLoaded = false;
 	bTerrainSelected = true;
-//	ofSetWindowShape(1024, 768);
+
 	cam.setDistance(10);
 	cam.setNearClip(.1);
 	cam.setFov(65.5);   // approx equivalent to 28mm in 35mm format
@@ -55,13 +54,27 @@ void ofApp::setup(){
 	mars.loadModel("geo/mars-low-v2.obj");
 	mars.setScaleNormalization(false);
 
-	boundingBox = meshBounds(mars.getMesh(0));
+	//boundingBox = &meshBounds(mars.getMesh(0));
+	boundingBox = new Box(
+		Vector3(-10, -6, -13),
+		Vector3(10, 6, 14)
+	);
 	
-	//  Test Box Subdivide
-	//
-	subDivideBox8(boundingBox, level1);
-	subDivideBox8(level1[0], level2);
-	subDivideBox8(level2[0], level3);
+	// Create 5 levels
+
+	vector<int> startingVerts;
+
+	uint64_t startTime = ofGetElapsedTimeMillis();
+
+    ofMesh mesh = mars.getMesh(0);
+    
+	octree = new Node(boundingBox, 9, &mesh, true, startingVerts);
+
+	uint64_t endTime = ofGetElapsedTimeMillis();
+
+	cout << "Octree build took " << endTime - startTime << " ms" << endl;
+	
+
 }
 
 //--------------------------------------------------------------
@@ -75,7 +88,7 @@ void ofApp::draw(){
 
 //	ofBackgroundGradient(ofColor(20), ofColor(0));   // pick your own backgroujnd
 	ofBackground(ofColor::black);
-//	cout << ofGetFrameRate() << endl;
+
 
 	cam.begin();
 	ofPushMatrix();
@@ -116,19 +129,21 @@ void ofApp::draw(){
 	
 	ofNoFill();
 	ofSetColor(ofColor::white);
-	drawBox(boundingBox);
+	//drawBox(boundingBox);
 
-	//ofSetColor(ofColor::red);
-	//for (int i=0; i < level1.size(); i++)
-	//	drawBox(level1[i]);
+	octree->draw();
 
-	//ofSetColor(ofColor::blue);
-	//for (int i = 0; i < level2.size(); i++)
-	//	drawBox(level2[i]);
+	/*ofSetColor(ofColor::red);
+	for (int i=0; i < level1.size(); i++)
+		drawBox(level1->at(i));
 
-	//ofSetColor(ofColor::yellow);
-	//for (int i = 0; i < level3.size(); i++)
-	//	drawBox(level3[i]);
+	ofSetColor(ofColor::blue);
+	for (int i = 0; i < level2->size(); i++)
+		drawBox(level2->at(i));
+
+	ofSetColor(ofColor::yellow);
+	for (int i = 0; i < level3->size(); i++)
+		drawBox(level3->at(i));*/
 
 
 	ofPopMatrix();
@@ -208,6 +223,9 @@ void ofApp::keyPressed(int key) {
 		break;
 	case OF_KEY_DEL:
 		break;
+	case GLFW_KEY_SPACE:
+		octree->undraw();
+		break;
 	default:
 		break;
 	}
@@ -253,13 +271,24 @@ void ofApp::mouseMoved(int x, int y ){
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button) {
+
+	if (bAltKeyDown) return;
+
     ofVec3f mouse(mouseX, mouseY);
 	ofVec3f rayPoint = cam.screenToWorld(mouse);
 	ofVec3f rayDir = rayPoint - cam.getPosition();
 	rayDir.normalize();
 	Ray ray = Ray(Vector3(rayPoint.x, rayPoint.y, rayPoint.z),
 		Vector3(rayDir.x, rayDir.y, rayDir.z));
-	if (level3[1].intersect(ray, -100, 100)) cout << "intersects" << endl;
+
+	uint64_t startTime = ofGetElapsedTimeMicros();
+
+	octree->checkIntersection(ray);
+
+	uint64_t endTime = ofGetElapsedTimeMicros();
+
+	cout << "Selection took " << endTime - startTime << " microseconds" << endl;
+
 }
 
 
@@ -299,38 +328,6 @@ Box ofApp::meshBounds(const ofMesh & mesh) {
 	return Box(Vector3(min.x, min.y, min.z), Vector3(max.x, max.y, max.z));
 }
 
-//  Subdivide a Box into eight(8) equal size boxes, return them in boxList;
-//
-void ofApp::subDivideBox8(const Box &box, vector<Box> & boxList) {
-	Vector3 min = box.parameters[0];
-	Vector3 max = box.parameters[1];
-	Vector3 size = max - min;
-	Vector3 center = size / 2 + min;
-	float xdist = (max.x() - min.x()) / 2;
-	float ydist = (max.y() - min.y()) / 2;
-	float zdist = (max.z() - min.z()) / 2;
-	Vector3 h = Vector3(0, ydist, 0);
-
-	//  generate ground floor
-	//
-	Box b[8];
-	b[0] = Box(min, center);
-	b[1] = Box(b[0].min() + Vector3(xdist, 0, 0), b[0].max() + Vector3(xdist, 0, 0));
-	b[2] = Box(b[1].min() + Vector3(0, 0, zdist), b[1].max() + Vector3(0, 0, zdist));
-	b[3] = Box(b[2].min() + Vector3(-xdist, 0, 0), b[2].max() + Vector3(-xdist, 0, 0));
-
-	boxList.clear();
-	for (int i = 0; i < 4; i++)
-		boxList.push_back(b[i]);
-
-	// generate second story
-	//
-	for (int i = 4; i < 8; i++) {
-		b[i] = Box(b[i - 4].min() + h, b[i - 4].max() + h);
-		boxList.push_back(b[i]);
-	}
-}
-
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button) {
 
@@ -341,7 +338,6 @@ void ofApp::mouseDragged(int x, int y, int button) {
 void ofApp::mouseReleased(int x, int y, int button) {
 
 }
-
 
 //
 //  Select Target Point on Terrain by comparing distance of mouse to 
@@ -459,7 +455,6 @@ void ofApp::initLightingAndMaterials() {
 
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
-//	glEnable(GL_LIGHT1);
 	glShadeModel(GL_SMOOTH);
 } 
 

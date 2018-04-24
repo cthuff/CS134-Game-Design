@@ -4,8 +4,6 @@
 #include "Util.h"
 
 
-
-
 //---------------------------------------------------------------
 // test if a ray intersects a plane.  If there is an intersection, 
 // return true and put point of intersection in "point"

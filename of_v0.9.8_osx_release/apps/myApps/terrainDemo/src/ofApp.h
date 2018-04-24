@@ -4,6 +4,7 @@
 #include  "ofxAssimpModelLoader.h"
 #include "box.h"
 #include "ray.h"
+#include "Octree.h"
 
 class ofApp : public ofBaseApp{
 
@@ -40,8 +41,8 @@ class ofApp : public ofBaseApp{
 		ofEasyCam cam;
 		ofxAssimpModelLoader mars, rover;
 		ofLight light;
-		Box boundingBox;
-		vector<Box> level1, level2, level3;
+		Box* boundingBox;
+		vector<vector<Box>> levels;
 	
 		bool bAltKeyDown;
 		bool bCtrlKeyDown;
@@ -55,6 +56,7 @@ class ofApp : public ofBaseApp{
 		ofVec3f selectedPoint;
 		ofVec3f intersectPoint;
 
-
 		const float selectionRange = 4.0;
+
+		Node* octree;
 };
