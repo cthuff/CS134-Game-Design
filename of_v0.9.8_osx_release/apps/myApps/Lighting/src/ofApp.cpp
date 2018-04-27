@@ -37,9 +37,9 @@ void ofApp::setup(){
 	keyLight.setup();
 	keyLight.enable();
 	keyLight.setAreaLight(1, 1);
-	keyLight.setAmbientColor(ofFloatColor(0.1, 0.1, 0.1));
-	keyLight.setDiffuseColor(ofFloatColor(1, 1, 1));
-	keyLight.setSpecularColor(ofFloatColor(1, 1, 1));
+//    keyLight.setAmbientColor(ofFloatColor(0.1, 0.1, 0.1));
+//    keyLight.setDiffuseColor(ofFloatColor(1, 1, 1));
+//    keyLight.setSpecularColor(ofFloatColor(1, 1, 1));
 	
 	keyLight.rotate(45, ofVec3f(0, 1, 0));
 	keyLight.rotate(-45, ofVec3f(1, 0, 0));
@@ -49,7 +49,7 @@ void ofApp::setup(){
 	fillLight.enable();
 	fillLight.setSpotlight();
 	fillLight.setScale(.05);
-	fillLight.setSpotlightCutOff(15);
+	fillLight.setSpotlightCutOff(50);
 	fillLight.setAttenuation(2, .001, .001);
 	fillLight.setAmbientColor(ofFloatColor(0.1, 0.1, 0.1));
 	fillLight.setDiffuseColor(ofFloatColor(1, 1, 1));
@@ -62,19 +62,20 @@ void ofApp::setup(){
 	rimLight.enable();
 	rimLight.setSpotlight();
 	rimLight.setScale(.05);
-	rimLight.setSpotlightCutOff(30);
+	rimLight.setSpotlightCutOff(100);
 	rimLight.setAttenuation(.2, .001, .001);
 	rimLight.setAmbientColor(ofFloatColor(0.1, 0.1, 0.1));
 	rimLight.setDiffuseColor(ofFloatColor(1, 1, 1));
 	rimLight.setSpecularColor(ofFloatColor(1, 1, 1));
 	rimLight.rotate(180, ofVec3f(0, 1, 0));
-	rimLight.setPosition(0, 5, -7);
+    rimLight.rotate(-30, ofVec3f(1, 0, 0));
+	rimLight.setPosition(7, 7, -7);
 
 	// Create Ground Plane
 	//
 	plane.set(20, 20, 2, 2);
 	plane.rotate(-90, ofVec3f(1, 0, 0));
-	planeMaterial.setAmbientColor(ofFloatColor(0.1, 0.1, 0.1, 1.0));
+	planeMaterial.setAmbientColor(ofFloatColor(0.2, 0.2, 0.2, 2.0));
 	planeMaterial.setDiffuseColor(ofFloatColor(0.3, 0.3, 0.3, 1.0));
 	planeMaterial.setSpecularColor(ofFloatColor(0.8, 0.8, 0.8, 1.0));
 	planeMaterial.setShininess(5);
