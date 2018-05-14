@@ -17,7 +17,6 @@
 		4441C7CD207ADEC1005981FF /* baseObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4441C7CC207ADEC1005981FF /* baseObject.cpp */; };
 		44D6F3DA207DA39400646554 /* RocketSurgery.icns in CopyFiles */ = {isa = PBXBuildFile; fileRef = 44D6F3D9207DA39400646554 /* RocketSurgery.icns */; };
 		483908258D00B98B4BE69F07 /* ofxLabel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 78D67A00EB899FAC09430597 /* ofxLabel.cpp */; };
-		5A01E0ABF1D271CBE4448B34 /* bullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C8A7F6CA3A1990474429EDAC /* bullet.cpp */; };
 		5CBB2AB3A60F65431D7B555D /* ofxButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C88333E71C9457E441C33474 /* ofxButton.cpp */; };
 		837220E80EB56CD44AD27F2A /* ofxSlider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15F2C6477A769C03A56D1401 /* ofxSlider.cpp */; };
 		856AA354D08AB4B323081444 /* ofxBaseGui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9604B925D32EE39065747725 /* ofxBaseGui.cpp */; };
@@ -94,7 +93,6 @@
 		BCDE8C9BEBCF137ABA15868F /* player.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = player.cpp; path = src/player.cpp; sourceTree = SOURCE_ROOT; };
 		C70D8946940288799E82131E /* ofxSliderGroup.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxSliderGroup.h; path = ../../../addons/ofxGui/src/ofxSliderGroup.h; sourceTree = SOURCE_ROOT; };
 		C88333E71C9457E441C33474 /* ofxButton.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxButton.cpp; path = ../../../addons/ofxGui/src/ofxButton.cpp; sourceTree = SOURCE_ROOT; };
-		C8A7F6CA3A1990474429EDAC /* bullet.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = bullet.cpp; path = src/bullet.cpp; sourceTree = SOURCE_ROOT; };
 		E112B3AEBEA2C091BF2B40AE /* ofxPanel.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxPanel.cpp; path = ../../../addons/ofxGui/src/ofxPanel.cpp; sourceTree = SOURCE_ROOT; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E4B69B5B0A3A1756003C02F2 /* Rocket Surgery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Rocket Surgery.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -197,7 +195,6 @@
 				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
 				4441C7CC207ADEC1005981FF /* baseObject.cpp */,
 				0C510CD244E8F31BBE6C7F8E /* baseObject.h */,
-				C8A7F6CA3A1990474429EDAC /* bullet.cpp */,
 				602A81F060D9838DFF60C466 /* bullet.hpp */,
 				0A7BA073EE566E318DA6422F /* emitter.cpp */,
 				0CAE2F887602FE2449052FB8 /* emitter.h */,
@@ -336,7 +333,6 @@
 				FF24E69E085B93726F8F5E06 /* player.cpp in Sources */,
 				35C65FFBB8537510DFA24AEC /* emitter.cpp in Sources */,
 				03A7C7A7915456622C905193 /* enemy.cpp in Sources */,
-				5A01E0ABF1D271CBE4448B34 /* bullet.cpp in Sources */,
 				856AA354D08AB4B323081444 /* ofxBaseGui.cpp in Sources */,
 				4441C7CB207ADDA4005981FF /* ParticleSystem.cpp in Sources */,
 				B56FE57CC35806596D38118C /* ofxSliderGroup.cpp in Sources */,

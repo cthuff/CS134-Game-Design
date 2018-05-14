@@ -15,11 +15,29 @@
 class Bullet : public BaseObject {
     
 public:
-    Bullet();
-    void draw();
-	void sound();
-	void kill();
+    Bullet() {
+        trans.x = 0;
+        trans.y = 0;
+        scale.x = 1.0;
+        scale.y = 1.0;
+        rot = 0;
+        speed = 0;
+        bSelected = false;
+        fire.load("sounds/pew.mp3");
+    }
+    void draw() {
+        ofSetColor(255, 255, 255, 255);
+        image.draw(trans.x - 10, trans.y - 100);
+    }
+	void sound()
+    {
+        fire.play();
+    }
+	void kill()
+    {
+        trans.set(0, -10);
+    }   
     float speed;
-    ofImage image;
-	ofSoundPlayer fire;
+        ofImage image;
+        ofSoundPlayer fire;
 };
